@@ -1,26 +1,102 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: dark;
+  --surface: #030a12;
+  --surface-strong: #01060d;
+  --surface-soft: #071523;
+  --text-primary: #edf8ff;
+  --text-secondary: rgba(202, 232, 240, 0.85);
+  --text-subtle: rgba(156, 185, 197, 0.65);
+  --accent-base: #14b4c6;
+  --accent-strong: #0f7ea0;
+  --deep-900: #041017;
+  --deep-800: #071c2c;
+  --border-glass: rgba(255, 255, 255, 0.12);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--surface);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-surface-soft: var(--surface-soft);
+  --color-muted-100: var(--text-primary);
+  --color-muted-80: var(--text-secondary);
+  --color-muted-70: rgba(177, 212, 222, 0.78);
+  --color-muted-60: var(--text-subtle);
+  --color-accent: var(--accent-base);
+  --color-accent-strong: var(--accent-strong);
+  --color-deep-900: var(--deep-900);
+  --color-deep-800: var(--deep-800);
+  --color-border-glass: var(--border-glass);
+  --shadow-soft: 0 28px 90px rgba(2, 12, 24, 0.55);
+  --radius-3xl: 32px;
+  --font-sans: var(--font-primary);
+  --font-display: var(--font-display);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #030a12 0%, #02060d 62%, #010409 100%);
+  color: var(--text-secondary);
+  font-family: var(--font-primary), "Poppins", system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+main {
+  isolation: isolate;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background-color: rgba(20, 180, 198, 0.35);
+  color: #f5fbff;
+}
+
+@layer utilities {
+  .section-container {
+    @apply mx-auto w-full max-w-[1200px] px-6;
+  }
+
+  .section-heading {
+    @apply font-display text-3xl uppercase tracking-[0.35em] text-white sm:text-4xl lg:text-5xl;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 35px rgba(20, 180, 198, 0.6);
+  }
+}
+
+@keyframes tech-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-tech-marquee {
+  animation: tech-marquee 28s linear infinite;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 28s linear infinite;
 }
