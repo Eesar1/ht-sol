@@ -4,9 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/constant";
 import { Button } from "@/ui/button";
+import Image from "next/image";
 
 const baseNavItem =
-  "relative rounded-full px-5 py-2 text-[0.8rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200";
+  "relative rounded-full px-5 py-2 text-[0.8rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 whitespace-nowrap";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("#home");
@@ -37,18 +38,20 @@ export default function Navbar() {
       <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-6 lg:py-10">
         <Link
           href="/"
-          className="flex items-center gap-3 text-lg font-bold uppercase tracking-[0.28em]"
+        
         >
-          <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/70 bg-white/10 text-accent shadow-[0_0_25px_rgba(20,180,198,0.35)]">
-            HT
-          </span>
-          <span className="font-display text-2xl tracking-[0.35em] text-white">
-            SOL
-          </span>
+          <Image
+            src="/ht-logo.png"
+            alt="HT Solutions"
+            width={132}
+            height={48}
+            priority
+            className="h-full w-full select-none"
+          />
         </Link>
 
-        <nav className="hidden items-center gap-4 lg:flex">
-          <div className="flex items-center gap-1 rounded-full border border-white/10 bg-white/5 px-1.5 py-1.5 backdrop-blur-xl">
+        <nav className="hidden items-center  lg:flex">
+          <div className="flex items-center rounded-full border border-white/10 bg-white/5 px-1 py-1 backdrop-blur-xl">
             {NAV_LINKS.map(({ label, href }) => {
               const isActive = activeLink === href;
               return (

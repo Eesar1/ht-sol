@@ -56,18 +56,6 @@ export default function BannerSection() {
                 confidence.
               </p>
             </div>
-
-            <div
-              className="flex flex-wrap items-center gap-3 text-sm uppercase tracking-[0.22em] text-muted-70"
-              data-animate="fade-up"
-            >
-              <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-white/90">
-                Get In Touch
-              </span>
-              <span>-</span>
-              <span>+92 317 420 1604</span>
-            </div>
-
             <div
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
               data-animate="fade-up"
@@ -97,14 +85,11 @@ export default function BannerSection() {
                   <div
                     className="h-[55%] w-[55%] rounded-full border border-accent/40 bg-accent/40 backdrop-blur-sm"
                     style={{
-                      backgroundImage: "url('/hero-globe.png')",
+                      backgroundImage: "url('/banner-glob.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="flex h-full w-full items-center justify-center text-xs uppercase tracking-[0.35em] text-white/65">
-                      Globe
-                    </div>
                   </div>
                 </div>
                 <span className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-accent/30" />
