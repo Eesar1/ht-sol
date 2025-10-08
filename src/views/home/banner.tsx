@@ -26,30 +26,22 @@ export default function BannerSection() {
       <div className="section-container">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
           <div className="space-y-10">
-            <div
-              className="flex items-center gap-3 text-[0.8rem] uppercase tracking-[0.35em] text-accent/85"
-              data-animate="fade-up"
-            >
-              <span className="h-1.5 w-14 rounded-full bg-accent/60" />
-              <span>Digital Innovation Agency</span>
-            </div>
+
 
             <div className="space-y-5 text-white" data-animate="fade-up">
               <div className="font-display text-[clamp(3.4rem,7vw,6.5rem)] leading-[0.85] uppercase">
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2">
                   <span>Welc</span>
                   <div
-                    className="h-[4.5rem] w-[8.5rem] rounded-[999px] bg-gradient-to-r from-accent/20 via-accent/40 to-accent/30 shadow-[0_0_35px_rgba(20,180,198,0.45)] backdrop-blur-sm sm:h-[5.2rem] sm:w-[9.8rem]"
+                    className="h-[4rem] w-[8.5rem] rounded-[999px] sm:h-[4.2rem] sm:w-[9.8rem]"
                     aria-hidden
                     style={{
-                      backgroundImage: "url('/hero-letter-o.png')",
+                      backgroundImage: "url('/letter-o.png')",
                       backgroundSize: "cover",
                       backgroundPosition: "center",
                     }}
                   >
-                    <div className="flex h-full w-full items-center justify-center text-xs font-medium text-muted-80">
-                      Image
-                    </div>
+
                   </div>
                   <span>me</span>
                 </div>
