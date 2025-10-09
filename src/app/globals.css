@@ -2,16 +2,16 @@
 
 :root {
   color-scheme: dark;
-  --surface: #030a12;
-  --surface-strong: #01060d;
-  --surface-soft: #071523;
+  --primary: linear-gradient(135deg, #075b65 0%, #00838a 50%, #328a99 100%);
+  --surface: #050505;
+  --surface-strong: #030303;
+  --surface-soft: #0a0a0a;
   --text-primary: #edf8ff;
   --text-secondary: rgba(202, 232, 240, 0.85);
   --text-subtle: rgba(156, 185, 197, 0.65);
-  --accent-base: #14b4c6;
-  --accent-strong: #0f7ea0;
-  --deep-900: #041017;
-  --deep-800: #071c2c;
+  --primary: linear-gradient(135deg, #075b65 0%, #00838a 50%, #328a99 100%);
+  --deep-900: #020202;
+  --deep-800: #0b0b0b;
   --border-glass: rgba(255, 255, 255, 0.12);
 }
 
@@ -22,10 +22,10 @@
   --color-surface-soft: var(--surface-soft);
   --color-muted-100: var(--text-primary);
   --color-muted-80: var(--text-secondary);
-  --color-muted-70: rgba(177, 212, 222, 0.78);
   --color-muted-60: var(--text-subtle);
-  --color-accent: var(--accent-base);
-  --color-accent-strong: var(--accent-strong);
+  --color-accent: #00838a;
+  --color-accent-strong: #075b65;
+  --gradient-primary: var(--primary);
   --color-deep-900: var(--deep-900);
   --color-deep-800: var(--deep-800);
   --color-border-glass: var(--border-glass);
@@ -41,7 +41,7 @@
 
 body {
   min-height: 100vh;
-  background: linear-gradient(180deg, #030a12 0%, #02060d 62%, #010409 100%);
+  background: linear-gradient(180deg, #020202 0%, #050505 62%, #000000 100%);
   color: var(--text-secondary);
   font-family: var(--font-primary), "Poppins", system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -57,7 +57,7 @@ a {
 }
 
 ::selection {
-  background-color: rgba(20, 180, 198, 0.35);
+  background-color: rgba(0, 131, 138, 0.35);
   color: #f5fbff;
 }
 
@@ -71,7 +71,27 @@ a {
   }
 
   .text-glow {
-    text-shadow: 0 0 35px rgba(20, 180, 198, 0.6);
+    text-shadow: 0 0 35px rgba(0, 131, 138, 0.6);
+  }
+
+  .bg-primary {
+    background-image: var(--primary);
+  }
+
+  .text-primary-gradient {
+    background-image: var(--primary);
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .shadow-primary {
+    box-shadow: 0 24px 68px rgba(0, 131, 138, 0.45);
+  }
+
+  .border-primary {
+    border-image-source: var(--primary);
+    border-image-slice: 1;
   }
 }
 

@@ -1,29 +1,68 @@
 "use client";
 
 import { useMemo, useRef } from "react";
-import { Button } from "@/ui/button";
-import { HERO_BADGES } from "@/constant";
+import Link from "next/link";
+import Image from "next/image";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
-const badgePositions = [
-  "top-10 right-[-6%]",
-  "bottom-14 right-[8%]",
-  "bottom-6 left-[-10%]",
+
+const orbitIcons = [
+  {
+    id: "Human",
+    label: "Human",
+    shortLabel: "H",
+    className: "top-[0%] right-[30%]",
+  },
+  {
+    id: "google",
+    label: "Google",
+    shortLabel: "G",
+    className: "top-[10%] left-[15%]",
+  },
+    {
+    id: "google",
+    label: "Google",
+    shortLabel: "G",
+    className: "top-[30%] left-[2%] ",
+  },
+  {
+    id: "meta",
+    label: "Meta",
+    shortLabel: "M",
+    className: "top-[32%] right-[0%]",
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    shortLabel: "TT",
+    className: "bottom-[5%] right-[25%]",
+  },
+  {
+    id: "growth",
+    label: "Growth",
+    shortLabel: "GR",
+    className: "bottom-[4%] left-[15%]",
+    imageSrc: "/growth.png",
+  },
+  {
+    id: "ai",
+    label: "AI",
+    shortLabel: "AI",
+    className: "top-[56%] left-[1%]",
+  },
 ];
 
 export default function BannerSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   useGsapReveal(containerRef, { y: 80, stagger: 0.08 });
-
-  const badges = useMemo(() => HERO_BADGES.slice(0, 3), []);
-
   return (
     <section
       id="home"
       ref={containerRef}
-      className="relative z-10 scroll-mt-32 pt-6 lg:pt-10 xl:pt-16"
+      className="relative z-10 overflow-hidden bg-cover bg-center bg-no-repeat scroll-mt-32 pt-6 lg:pt-10 xl:pt-16"
     >
-      <div className="section-container">
+      <div className="absolute inset-0 bg-[url('/image-banner.png')] bg-cover bg-center bg-no-repeat opacity-10 z-0"></div>
+      <div className="section-container relative z-10">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
           <div className="space-y-10">
 
@@ -60,16 +99,8 @@ export default function BannerSection() {
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
               data-animate="fade-up"
             >
-              <Button href="#contact" icon={<ArrowTopRightIcon />}>
-                Get In Touch
-              </Button>
-              <Button
-                href="tel:+923174201604"
-                variant="outline"
-                icon={<PhoneIcon />}
-              >
-                +92 317 420 1604
-              </Button>
+              <GetInTouchCTA />
+              <PhoneCTA />
             </div>
           </div>
 
@@ -77,37 +108,93 @@ export default function BannerSection() {
             className="relative mx-auto flex w-full max-w-[440px] items-center justify-center"
             data-animate="fade-up"
           >
-            <div className="relative aspect-square w-full rounded-full border border-accent/20 bg-[radial-gradient(circle_at_50%_50%,rgba(20,180,198,0.5),rgba(2,12,24,0.65)_58%,rgba(2,12,24,0.95)_100%)] p-10 shadow-[0_45px_120px_rgba(6,40,60,0.45)]">
-              <div className="relative h-full w-full rounded-full border border-white/10">
-                <div className="absolute inset-8 rounded-full border border-white/10 opacity-70" />
-                <div className="absolute inset-16 rounded-full border border-white/10 opacity-60" />
-                <div className="absolute inset-14 flex items-center justify-center rounded-full border border-accent/30 bg-[radial-gradient(circle,_rgba(21,152,182,0.4)_0%,_rgba(9,32,49,0.8)_65%,_rgba(3,12,24,0.95)_100%)]">
-                  <div
-                    className="h-[55%] w-[55%] rounded-full border border-accent/40 bg-accent/40 backdrop-blur-sm"
-                    style={{
-                      backgroundImage: "url('/banner-glob.png')",
-                      backgroundSize: "cover",
-                      backgroundPosition: "center",
-                    }}
-                  >
-                  </div>
-                </div>
-                <span className="absolute inset-0 animate-spin-slow rounded-full border border-dashed border-accent/30" />
+            <div className="group relative aspect-square w-full">
+              <div className="absolute inset-[15%] rounded-full bg-[#030914] shadow-[0_30px_120px_rgba(0,0,0,0.6)]" />
+              <div className="absolute inset-[15%] rounded-full border border-accent/70" />
+              <div className="absolute inset-[26%] flex items-center justify-center rounded-full bg-[#061526] shadow-[0_20px_60px_rgba(5,18,33,0.75)]">
+                <div
+                  className="h-[64%] w-[64%] rounded-full border border-accent/40 "
+                  style={{
+                    backgroundImage: "url('/banner-glob.png')",
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
               </div>
-              {badges.map((badge, index) => (
-                <FloatingBadge
-                  key={badge.id}
-                  className={badgePositions[index] ?? ""}
-                  title={badge.title}
-                  description={badge.description}
-                  image={badge.image}
+              <div className="absolute inset-[5%] rounded-full border border-dashed border-white/20" />
+              {orbitIcons.map((icon) => (
+                <OrbitIcon
+                  key={icon.id}
+                  className={icon.className}
+                  label={icon.label}
+                  shortLabel={icon.shortLabel}
+                  imageSrc={icon.imageSrc}
                 />
               ))}
+              
             </div>
           </div>
         </div>
       </div>
+
+      <div
+        className="relative z-10 mt-16 flex flex-col items-center gap-6"
+        data-animate="fade-up"
+      >
+        <Image
+          src="/globe-line.png"
+          alt="Orbital line accent"
+          width={1920}
+          height={286}
+          className="h-auto w-full "
+        />
+        <Image
+          src="/explore.svg"
+          alt="Explore Now indicator"
+          width={119}
+          height={111}
+          className="h-auto w-auto select-none"
+        />
+      </div>
     </section>
+  );
+}
+
+function GetInTouchCTA() {
+  return (
+    <Link
+      href="#contact"
+      className="group relative inline-flex items-center focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      <span className="inline-flex h-11 items-center whitespace-nowrap rounded-full bg-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white shadow-[0_15px_45px_rgba(20,180,198,0.35)] transition-colors duration-300 group-hover:bg-accent/90">
+        Get In Touch
+      </span>
+      <span className="-ml-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-[0_15px_45px_rgba(20,180,198,0.35)] transition-colors duration-300 group-hover:bg-accent/90">
+        <ArrowTopRightIcon />
+      </span>
+    </Link>
+  );
+}
+
+function PhoneCTA() {
+  return (
+    <a
+      href="tel:+923174201604"
+      className="group relative inline-flex items-center  focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      <span className="inline-flex border-r-0 h-11 items-center whitespace-nowrap rounded-full border border-white bg-transparent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-300 group-hover:border-accent/70 group-hover:bg-white/10 group-hover:text-white">
+        +92 317 420 1604
+      </span>
+      <span className="-ml-2 border-l-0  flex h-11 w-11 items-center justify-center rounded-full  border border-white bg-transparent text-white transition-colors duration-300 group-hover:border-accent/70 group-hover:bg-white/10 group-hover:text-deep-900">
+        <Image
+          src="/call.svg"
+          width={18}
+          height={18}
+          alt="Call us"
+          className="transition-[filter] duration-300 group-hover:invert"
+        />
+      </span>
+    </a>
   );
 }
 
@@ -142,6 +229,65 @@ function FloatingBadge({
   );
 }
 
+function OrbitIcon({
+  className,
+  label,
+  shortLabel,
+  imageSrc,
+}: {
+  className?: string;
+  label: string;
+  shortLabel?: string;
+  imageSrc?: string;
+}) {
+  return (
+    <div
+      className={[
+        "absolute flex flex-col items-center gap-2 text-center text-xs text-white",
+        className,
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      aria-label={label}
+    >
+      {imageSrc ? (
+        <Image
+          src={imageSrc}
+          alt={label}
+          width={48}
+          height={48}
+          className="h-full w-22 object-cover "
+          quality={100}
+        />
+      ) : (
+        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold uppercase tracking-[0.12em] backdrop-blur-sm">
+          {shortLabel}
+        </span>
+      )}
+    </div>
+  );
+}
+
+
+function StarIcon() {
+  return (
+    <svg
+      aria-hidden
+      width="12"
+      height="12"
+      viewBox="0 0 20 20"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="text-accent"
+    >
+      <path
+        d="M9.99987 2.5L12.2853 7.13305L17.3926 7.90983L13.6962 11.4869L14.5707 16.5902L9.99987 14.115L5.429 16.5902L6.30352 11.4869L2.60718 7.90983L7.71444 7.13305L9.99987 2.5Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function ArrowTopRightIcon() {
   return (
     <svg
@@ -162,26 +308,6 @@ function ArrowTopRightIcon() {
         d="M5 3H11V9"
         stroke="currentColor"
         strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.6667 9.68688V11.0836C11.6667 11.3649 11.437 11.5903 11.1493 11.5869C10.3833 11.5781 8.82767 11.3951 7.28908 10.3352C5.51783 9.10929 4.23692 6.9411 3.77258 6.07691C3.68825 5.92048 3.68825 5.7393 3.77258 5.58287C4.23692 4.71868 5.51783 2.55049 7.28908 1.32461C8.82767 0.264682 10.3833 0.0816746 11.1493 0.0729019C11.437 -0.000934714 11.6667 0.224531 11.6667 0.505765V1.90251C11.6667 2.15353 11.4883 2.37262 11.2427 2.42236L9.691 2.73538C9.46417 2.7805 9.30275 2.9852 9.327 3.21374C9.37858 3.69944 9.30983 4.2311 8.81058 4.69666C8.42092 5.05908 8.45117 5.64025 8.81058 6.00267L9.077 6.26204C9.93233 7.0955 10.9472 7.79766 11.6245 8.19322C11.8563 8.32666 11.9597 8.60784 11.8741 8.86065L11.2427 10.4705C11.1584 10.7052 10.9146 10.833 10.6735 10.7704C10.0732 10.6122 9.33092 10.3122 8.6885 9.81866"
-        stroke="currentColor"
-        strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

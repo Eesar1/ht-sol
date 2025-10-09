@@ -8,27 +8,6 @@ export const NAV_LINKS = [
   { label: "Blogs", href: "#blogs" },
 ];
 
-export const HERO_BADGES = [
-  {
-    id: "customers",
-    title: "500+ Happy Customers",
-    description: "Client partners worldwide",
-    image: "/hero-badge-customers.png",
-  },
-  {
-    id: "growth",
-    title: "Growth Rate",
-    description: "+212% avg. uplift",
-    image: "/hero-badge-growth.png",
-  },
-  {
-    id: "automation",
-    title: "Automation Ready",
-    description: "AI-led optimization",
-    image: "/hero-badge-automation.png",
-  },
-];
-
 export const SERVICES = [
   {
     title: "Brand-First Web Design",

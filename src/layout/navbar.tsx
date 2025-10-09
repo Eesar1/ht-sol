@@ -7,7 +7,7 @@ import { Button } from "@/ui/button";
 import Image from "next/image";
 
 const baseNavItem =
-  "relative rounded-full px-5 py-2 text-[0.8rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 whitespace-nowrap";
+  "relative  rounded-full px-5 py-2 text-[0.8rem] font-semibold uppercase tracking-[0.18em] transition-colors duration-200 whitespace-nowrap";
 
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("#home");
@@ -35,7 +35,8 @@ export default function Navbar() {
 
   return (
     <header className="relative z-30">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between px-6 py-6 lg:py-10">
+      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between  py-6 lg:py-10 overflow-hidden relative bg-cover bg-center bg-no-repeat scroll-mt-32 pt-6  ">
+      <div className="absolute inset-0 bg-[url('/image-banner.png')] bg-cover bg-center bg-no-repeat opacity-20 z-0"></div>
         <Link
           href="/"
         
@@ -43,37 +44,39 @@ export default function Navbar() {
           <Image
             src="/ht-logo.png"
             alt="HT Solutions"
-            width={132}
+            width={162}
             height={48}
             priority
             className="h-full w-full select-none"
           />
         </Link>
 
-        <nav className="hidden items-center  lg:flex">
-          <div className="flex items-center rounded-full border border-white/10 bg-white/5 px-1 py-1 backdrop-blur-xl">
-            {NAV_LINKS.map(({ label, href }) => {
-              const isActive = activeLink === href;
-              return (
-                <Link
-                  key={label}
-                  href={href}
-                  onClick={() => handleNavigate(href)}
-                  className={[
-                    baseNavItem,
-                    isActive
-                      ? "bg-accent text-deep-900 shadow-[0_12px_40px_rgba(20,180,198,0.35)]"
-                      : "text-muted-70 hover:text-white",
-                  ].join(" ")}
-                >
-                  {label}
-                </Link>
-              );
-            })}
+        <nav className="hidden items-center lg:flex">
+          <div className="flex items-center rounded-full border border-accent bg-white/5 px-1 py-1">
+            <div className="flex items-center">
+              <div className="flex items-center rounded-full py-1 ">
+                {NAV_LINKS.map(({ label, href }) => {
+                  const isActive = activeLink === href;
+                  return (
+                    <Link
+                      key={label}
+                      href={href}
+                      onClick={() => handleNavigate(href)}
+                      className={[
+                        baseNavItem,
+                        isActive
+                          ? "bg-accent text-white"
+                          : "text-white hover:text-white",
+                      ].join(" ")}
+                    >
+                      {label}
+                    </Link>
+                  );
+                })}
+              </div>
+              <ContactCTA />
+            </div>
           </div>
-          <Button href="#contact" icon={<ArrowTopRightIcon />}>
-            Contact Us
-          </Button>
         </nav>
 
         <button
@@ -87,7 +90,7 @@ export default function Navbar() {
 
         {open ? (
           <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm lg:hidden">
-            <div className="mx-auto mt-24 w-[90%] max-w-sm rounded-3xl border border-white/10 bg-deep-800/95 p-6 shadow-[0_40px_120px_rgba(3,12,24,0.65)]">
+            <div className="mx-auto mt-24 w-[90%] max-w-sm rounded-3xl border border-white/10 bg-deep-800/95 p-6 ">
               <div className="mb-6 flex items-center justify-between">
                 <span className="font-display text-2xl tracking-[0.45em] text-white">
                   Menu
@@ -95,13 +98,13 @@ export default function Navbar() {
                 <button
                   type="button"
                   aria-label="Close navigation menu"
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/80 transition hover:border-accent/60 hover:text-white"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-accent/60 hover:text-white"
                   onClick={() => setOpen(false)}
                 >
                   <CloseIcon />
                 </button>
               </div>
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col ">
                 {NAV_LINKS.map(({ label, href }) => {
                   const isActive = activeLink === href;
                   return (
@@ -112,8 +115,8 @@ export default function Navbar() {
                       className={[
                         "rounded-2xl border border-white/10 px-5 py-3 text-sm font-semibold uppercase tracking-[0.22em] transition",
                         isActive
-                          ? "bg-accent text-deep-900"
-                          : "text-muted-80 hover:border-accent/60 hover:text-white",
+                          ? "bg-accent text-white"
+                          : "text-white hover:border-accent/60 hover:text-white",
                       ].join(" ")}
                     >
                       {label}
@@ -122,9 +125,7 @@ export default function Navbar() {
                 })}
               </div>
               <div className="mt-6 flex flex-col gap-3">
-                <Button href="#contact" icon={<ArrowTopRightIcon />}>
-                  Contact Us
-                </Button>
+                <ContactCTA onClick={() => setOpen(false)} />
                 <Button
                   href="tel:+923174201604"
                   variant="outline"
@@ -138,6 +139,23 @@ export default function Navbar() {
         ) : null}
       </div>
     </header>
+  );
+}
+
+function ContactCTA({ onClick }: { onClick?: () => void }) {
+   return (
+    <Link
+      href="#contact"
+      onClick={onClick}
+      className="group relative inline-flex items-center focus-visible:outline-offset-2 focus-visible:outline-accent"
+    >
+      <span className="inline-flex h-11 items-center whitespace-nowrap rounded-full bg-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-300 group-hover:bg-accent/90">
+        Contact Us
+      </span>
+      <span className="-ml-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white  transition-colors duration-300 group-hover:bg-accent/90">
+        <ArrowTopRightIcon />
+      </span>
+    </Link>
   );
 }
 
