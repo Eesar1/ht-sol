@@ -1,50 +1,139 @@
 "use client";
 
 import { useRef } from "react";
-import { Button } from "@/ui/button";
 import { SERVICES } from "@/constant";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { Button } from "@/ui/button";
+
+const SERVICE_GLYPHS = ["Ads", "UX", "AI", "Dev", "Brand"];
 
 export default function ServicesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   useGsapReveal(containerRef, { y: 64, stagger: 0.08 });
 
+  const servicesWithIndex = SERVICES.map((service, index) => ({
+    ...service,
+    originalIndex: index,
+  }));
+
+  const FEATURED_SERVICE_INDEX = 1;
+  const featuredService = servicesWithIndex[FEATURED_SERVICE_INDEX];
+  const sideServices = servicesWithIndex.filter(
+    ({ originalIndex }) => originalIndex !== FEATURED_SERVICE_INDEX
+  );
+  const leftColumnServices = sideServices.filter((_, idx) => idx % 2 === 0);
+  const rightColumnServices = sideServices.filter((_, idx) => idx % 2 === 1);
+
   return (
     <section
       id="services"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 pt-6 lg:pt-12"
+      className="relative z-10 overflow-hidden scroll-mt-24 pt-12 pb-16 lg:pt-20 lg:pb-28"
     >
+      <div className="pointer-events-none absolute inset-x-0 top-1/12 bottom-0 -z-10 bg-[url('/dark.png')] bg-cover bg-center bg-no-repeat" />
       <div className="section-container">
-        <div className="relative">
-          <span className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden w-full -translate-x-1/2 text-center font-display text-[8rem] uppercase tracking-[0.35em] text-white/5 md:block lg:text-[10rem]">
-            Services
-          </span>
-          <div className="grid gap-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
-            <div className="space-y-6" data-animate="fade-up">
-              <p className="text-sm uppercase tracking-[0.35em] text-accent/80">
-                What we offer
-              </p>
-              <h2 className="section-heading text-white">Full-service team</h2>
-              <p className="max-w-[420px] text-base leading-relaxed text-muted-70">
-                From brand story to deployment and scale, HT Solutions delivers
-                complete product, marketing, and experience design for ambitious
-                teams worldwide.
-              </p>
-              <Button href="#contact" variant="secondary" icon={<ArrowIcon />}>
+        <div className="flex justify-center">
+          <svg
+            className="pointer-events-none absolute left-1/2 top-0 -z-20 hidden md:block -translate-x-1/2 w-[min(1500px,150%)]"
+            viewBox="0 0 1600 320"
+            aria-hidden
+          >
+            <defs>
+              <linearGradient id="services-stroke" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stopColor="#075b65" />
+                <stop offset="50%" stopColor="#00838a" />
+                <stop offset="100%" stopColor="#328a99" />
+              </linearGradient>
+            </defs>
+            <text
+              x="50%"
+              y="65%"
+              textAnchor="middle"
+              fontFamily="Poppins, var(--font-display), sans-serif"
+              fontSize="240"
+              style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
+              fill="transparent"
+              stroke="url(#services-stroke)"
+              strokeWidth="1"
+            >
+              Services
+            </text>
+          </svg>
+        </div>
+
+        <div className="relative mt-4 overflow-hidden px-6 pb-12 pt-25 lg:px-12 ">
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start ">
+            <div className="mt-8 space-y-6  text-white" data-animate="fade-up">
+              <p className="section-heading">What We Offer</p>
+              <Button href="#contact" icon={<ArrowIcon />}>
                 Get In Touch
               </Button>
             </div>
-            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-              {SERVICES.map((service, index) => (
-                <ServiceCard
-                  key={service.title}
-                  index={index + 1}
-                  featured={index === Math.floor(SERVICES.length / 2)}
-                  title={service.title}
-                  description={service.description}
-                />
-              ))}
+            <div
+              className="max-w-xl text-base leading-relaxed text-muted-60"
+              data-animate="fade-up"
+            >
+              We specialize in CGI and Mixed Reality Ads, 3D Animations, Web
+              Design, UI/UX Design, Branding, and Digital Marketing (including
+              SEO, Google Ads, and Social Media). Additionally, we provide AI
+              and Custom Software Development, tailored to meet your unique
+              needs.
+            </div>
+          </div>
+
+          <div className="relative mt-14">
+            {/* Mobile & tablet fallback layout */}
+            <div className="grid gap-7 md:grid-cols-2 xl:hidden">
+              {servicesWithIndex.map(
+                ({ title, description, originalIndex }) => (
+                  <ServiceCard
+                    key={title}
+                    index={originalIndex}
+                    title={title}
+                    description={description}
+                  />
+                )
+              )}
+            </div>
+
+            {/* Desktop three-column layout */}
+            <div className="hidden xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)_minmax(0,1fr)] xl:gap-8">
+              <div className="flex flex-col gap-7">
+                {leftColumnServices.map(
+                  ({ title, description, originalIndex }) => (
+                    <ServiceCard
+                      key={title}
+                      index={originalIndex}
+                      title={title}
+                      description={description}
+                    />
+                  )
+                )}
+              </div>
+
+              <div className="flex flex-col gap-7">
+                {featuredService && (
+                  <ServiceCard
+                    index={featuredService.originalIndex}
+                    title={featuredService.title}
+                    description={featuredService.description}
+                    variant="featured"
+                  />
+                )}
+              </div>
+
+              <div className="flex flex-col gap-7">
+                {rightColumnServices.map(
+                  ({ title, description, originalIndex }) => (
+                    <ServiceCard
+                      key={title}
+                      index={originalIndex}
+                      title={title}
+                      description={description}
+                    />
+                  )
+                )}
+              </div>
             </div>
           </div>
         </div>
@@ -57,43 +146,76 @@ type ServiceCardProps = {
   index: number;
   title: string;
   description: string;
-  featured?: boolean;
+  variant?: "default" | "featured";
 };
 
 function ServiceCard({
   index,
   title,
   description,
-  featured,
+  variant = "default",
 }: ServiceCardProps) {
+  const baseClasses =
+    "group relative flex h-full flex-col items-center rounded-[32px] border border-white/12 bg-[#070f19]/90 px-8 pb-12 pt-14 text-center text-muted-60 transition-all duration-300 hover:border-accent/50";
+  const featuredClasses =
+    "border-accent/60 bg-[#061624]/95 shadow-[0_22px_88px_rgba(0,131,138,0.25)]";
+
+  const arrowBaseClasses =
+    "inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-deep-900 transition-transform duration-300 group-hover:-translate-y-1";
+  const arrowFeaturedClasses =
+    "bg-white text-accent shadow-[0_12px_42px_rgba(0,0,0,0.35)]";
+
   return (
     <div
-      className={[
-        "relative flex h-full flex-col justify-between gap-6 rounded-[28px] border border-white/12 bg-white/[0.04] p-6 text-left text-muted-70 transition-all duration-300",
-        featured
-          ? "border-accent/40 bg-accent/10 shadow-[0_35px_100px_rgba(12,120,148,0.4)] lg:-translate-y-8"
-          : "hover:-translate-y-2 hover:border-accent/30 hover:bg-white/[0.08]",
-      ].join(" ")}
+      className={`${baseClasses} ${
+        variant === "featured" ? featuredClasses : ""
+      }`}
       data-animate="fade-up"
     >
-      <div className="flex flex-col gap-5">
-        <div
-          className={[
-            "flex h-16 w-16 items-center justify-center rounded-full border-2 border-dashed border-accent/30 bg-white/5 text-sm font-semibold uppercase tracking-[0.2em] text-accent/80",
-            featured ? "bg-accent/20 text-deep-900" : "",
-          ].join(" ")}
+      <ServiceIcon index={index} variant={variant} />
+      <h3 className="mt-8 text-base font-semibold uppercase tracking-[0.2em] text-white">
+        {title}
+      </h3>
+      <p className="mt-4 text-sm leading-relaxed text-muted-50">{description}</p>
+
+      <div className="mt-12 flex w-full justify-center">
+        <span
+          className={`${arrowBaseClasses} ${
+            variant === "featured" ? arrowFeaturedClasses : ""
+          }`}
         >
-          {index.toString().padStart(2, "0")}
-        </div>
-        <h3 className="text-lg font-semibold text-white">{title}</h3>
-        <p className="text-sm leading-relaxed">{description}</p>
-      </div>
-      <div className="flex items-center justify-between text-xs uppercase tracking-[0.28em] text-muted-60">
-        <span>Discover More</span>
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80">
           <ArrowMiniIcon />
         </span>
       </div>
+    </div>
+  );
+}
+
+function ServiceIcon({
+  index,
+  variant,
+}: {
+  index: number;
+  variant?: "default" | "featured";
+}) {
+  const label = SERVICE_GLYPHS[index % SERVICE_GLYPHS.length];
+
+  return (
+    <div
+      className={`relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-accent/45 bg-[#0c1824] ${
+        variant === "featured"
+          ? "border-accent/70 bg-[#0d1f30] shadow-[0_12px_36px_rgba(0,131,138,0.25)]"
+          : ""
+      }`}
+    >
+      <span
+        className={`pointer-events-none absolute inset-2 rounded-full border border-white/10 ${
+          variant === "featured" ? "border-white/20" : ""
+        }`}
+      />
+      <span className="text-sm font-semibold uppercase tracking-[0.24em] text-white">
+        {label}
+      </span>
     </div>
   );
 }

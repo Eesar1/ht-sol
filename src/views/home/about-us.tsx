@@ -12,18 +12,42 @@ export default function AboutUsSection() {
     <section
       id="about"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 pt-8 lg:pt-12"
+      className="relative z-10 scroll-mt-24 pt-8 lg:pt-10"
     >
       <div className="section-container">
-        <div className="relative">
-          <span className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden w-full -translate-x-1/2 text-center font-display text-[8rem] uppercase tracking-[0.35em] text-white/5 md:block lg:text-[10rem]">
-            About Us
-          </span>
-          <div className="flex flex-col gap-12 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
+        <div className="relative pt-14 md:pt-20">
+          <svg
+  className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
+  viewBox="0 0 1600 260"
+  aria-hidden
+>
+  <defs>
+    {/* gradient: 135deg, #075b65 → #00838a → #328a99 */}
+    <linearGradient id="about-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stopColor="#075b65" />
+      <stop offset="50%" stopColor="#00838a" />
+      <stop offset="100%" stopColor="#328a99" />
+    </linearGradient>
+  </defs>
+
+  <text
+    x="50%" y="60%"
+    textAnchor="middle"
+    fontFamily="Poppins, var(--font-display), sans-serif"
+    fontSize="220"               /* ≈ text-[8rem]–[10rem] */
+    style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+    fill="transparent"
+    stroke="url(#about-stroke)"
+    strokeWidth="1"              /* thinner outline; try 0.8–1.2 */
+  >
+    About Us
+  </text>
+</svg>
+          <div className="flex flex-col gap-12 pt-14 lg:grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-center">
             <div className="relative" data-animate="fade-up">
-              <div className="group relative overflow-hidden rounded-[32px] border border-white/10 bg-[#0a1b29]/60 shadow-[0_30px_90px_rgba(1,8,18,0.6)]">
+              <div className="group relative overflow-hidden rounded-[12px] border border-white/10 bg-[#0a1b29]/60 shadow-[0_30px_90px_rgba(1,8,18,0.6)]">
                 <div
-                  className="relative block h-full min-h-[320px] w-full overflow-hidden bg-gradient-to-br from-[#102a3c] via-[#021522] to-[#010910] p-6 sm:min-h-[400px]"
+                  className="relative block h-full min-h-[320px] w-full overflow-hidden bg-gradient-to-br from-[#102a3c] via-[#021522] to-[#010910] pt-16 sm:min-h-[400px]"
                   style={{
                     backgroundImage: "url('/about-visual.png')",
                     backgroundSize: "cover",
@@ -31,40 +55,27 @@ export default function AboutUsSection() {
                   }}
                 >
                   <div className="flex h-full w-full items-end justify-start">
-                    <div className="rounded-3xl border border-white/10 bg-black/30 px-6 py-4 backdrop-blur-md">
-                      <span className="font-display text-sm uppercase tracking-[0.45em] text-white/70">
-                        Visual Placeholder
-                      </span>
-                    </div>
                   </div>
                 </div>
-                <div className="pointer-events-none absolute inset-2 rounded-[28px] border border-white/10 opacity-40" />
               </div>
-              <div className="absolute -right-8 bottom-10 hidden h-28 w-28 items-center justify-center rounded-full border border-accent/40 bg-white/5 text-accent shadow-[0_25px_65px_rgba(5,26,41,0.6)] backdrop-blur-md md:flex">
+              <div className="absolute -right-18 top-[-14%] hidden h-28 w-28 items-center justify-center rounded-full border border-accent/40 bg-white/5 text-accent shadow-[0_25px_65px_rgba(5,26,41,0.6)] backdrop-blur-md md:flex">
                 <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-accent/50 text-xs font-semibold uppercase tracking-[0.4em]">
                   <span className="-rotate-45">HT</span>
                 </div>
               </div>
             </div>
-            <div className="space-y-8 text-muted-70" data-animate="fade-up">
-              <div className="space-y-4">
-                <p className="text-sm uppercase tracking-[0.35em] text-accent/80">
-                  Who we are?
-                </p>
+            <div className="space-y-2 pl-4 text-white" data-animate="fade-up">
+              <div className="space-y-5" >
+
                 <h2 className="section-heading text-white">
-                  Strategy-led, design obsessed
+                  Who We Are?
                 </h2>
               </div>
               <p className="max-w-[520px] text-base leading-relaxed">
-                Since our establishment, we have partnered with hundreds of
-                forward-thinking brands. Our multi-disciplinary team builds
-                conversion-focused websites, mobile applications, visual brand
-                systems, and immersive content that scales with your business.
+                Since our establishment we have successfully served hundreds of clients world wide. Our primary skills are around web designing and mobile application development. We have a team of 40+ dedicated professionals for all kinds of tasks.
               </p>
               <p className="max-w-[520px] text-base leading-relaxed">
-                From research and user journeys to end-to-end development,
-                marketing automation, and analytics, we blend creative craft
-                with measurable performance.
+                HTSolutions provides you Website Designing, Web Development, SEO Services, Graphic Designing, Mobile Application Development Video Production, Voice Over, Digital Marketing and Network Solutions.
               </p>
               <Button href="#about-more" icon={<ArrowTopRightIcon />}>
                 Learn More About Us

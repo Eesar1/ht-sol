@@ -1,9 +1,9 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import Link from "next/link";
+import { useRef } from "react";
 import Image from "next/image";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
+import { Button } from "@/ui/button";
 
 
 const orbitIcons = [
@@ -138,7 +138,7 @@ export default function BannerSection() {
       </div>
 
       <div
-        className="relative z-10 mt-16 flex flex-col items-center gap-6"
+        className="relative z-10  flex flex-col items-center gap-6"
         data-animate="fade-up"
       >
         <Image
@@ -162,17 +162,9 @@ export default function BannerSection() {
 
 function GetInTouchCTA() {
   return (
-    <Link
-      href="#contact"
-      className="group relative inline-flex items-center focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <span className="inline-flex h-11 items-center whitespace-nowrap rounded-full bg-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white shadow-[0_15px_45px_rgba(20,180,198,0.35)] transition-colors duration-300 group-hover:bg-accent/90">
-        Get In Touch
-      </span>
-      <span className="-ml-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-[0_15px_45px_rgba(20,180,198,0.35)] transition-colors duration-300 group-hover:bg-accent/90">
-        <ArrowTopRightIcon />
-      </span>
-    </Link>
+    <Button href="#contact" icon={<ArrowTopRightIcon />}>
+      Get In Touch
+    </Button>
   );
 }
 

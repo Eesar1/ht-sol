@@ -143,19 +143,10 @@ export default function Navbar() {
 }
 
 function ContactCTA({ onClick }: { onClick?: () => void }) {
-   return (
-    <Link
-      href="#contact"
-      onClick={onClick}
-      className="group relative inline-flex items-center focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <span className="inline-flex h-11 items-center whitespace-nowrap rounded-full bg-accent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-300 group-hover:bg-accent/90">
-        Contact Us
-      </span>
-      <span className="-ml-2 flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white  transition-colors duration-300 group-hover:bg-accent/90">
-        <ArrowTopRightIcon />
-      </span>
-    </Link>
+  return (
+    <Button href="#contact" icon={<ArrowTopRightIcon />} onClick={onClick}>
+      Contact Us
+    </Button>
   );
 }
 
