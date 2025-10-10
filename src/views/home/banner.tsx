@@ -1,56 +1,65 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import Image from "next/image";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 import { Button } from "@/ui/button";
 
 
+const orbitHighlights = [
+ 
+  {
+    id: "rating",
+    label: "Customer Rating",
+    className: "top-[2%] right-[-6%]",
+    imageSrc: "/ratings.png",
+    variant: "rating" as const,
+  },
+  {
+    id: "growth",
+    label: "Growth Rate",
+    className: "bottom-[-4%] left-[-5%]",
+    imageSrc: "/growth.png",
+    variant: "growth" as const,
+  },
+];
+
 const orbitIcons = [
   {
-    id: "Human",
-    label: "Human",
-    shortLabel: "H",
-    className: "top-[0%] right-[30%]",
+    id: "google",
+    label: "Google Ads",
+    className: "top-[3%] left-[18%]",
+    imageSrc: "/google-ads.svg",
   },
   {
-    id: "google",
-    label: "Google",
-    shortLabel: "G",
-    className: "top-[10%] left-[15%]",
-  },
-    {
-    id: "google",
-    label: "Google",
-    shortLabel: "G",
-    className: "top-[30%] left-[2%] ",
+    id: "Google",
+    label: "Google Ads",
+    className: "top-[25%] left-[-2%]",
+    imageSrc: "/google-ads.svg",
   },
   {
     id: "meta",
     label: "Meta",
-    shortLabel: "M",
-    className: "top-[32%] right-[0%]",
+    className: "top-[60%] right-[-3%]",
+    imageSrc: "/meta.svg",
   },
   {
     id: "tiktok",
     label: "TikTok",
-    shortLabel: "TT",
-    className: "bottom-[5%] right-[25%]",
+    className: "bottom-[-2%] right-[25%]",
+    imageSrc: "/tik-tok.svg",
   },
   {
-    id: "growth",
-    label: "Growth",
-    shortLabel: "GR",
-    className: "bottom-[4%] left-[15%]",
-    imageSrc: "/growth.png",
-  },
-  {
-    id: "ai",
-    label: "AI",
-    shortLabel: "AI",
-    className: "top-[56%] left-[1%]",
+    id: "Blue",
+    label: "Blue ",
+    className: "top-[56%] left-[-5%]",
+    imageSrc: "/blue.svg",
   },
 ];
+
+const orbitAnimationStyle = {
+  "--orbit-duration": "32s",
+} as CSSProperties;
 
 export default function BannerSection() {
   const containerRef = useRef<HTMLElement>(null);
@@ -109,11 +118,11 @@ export default function BannerSection() {
             data-animate="fade-up"
           >
             <div className="group relative aspect-square w-full">
-              <div className="absolute inset-[15%] rounded-full bg-[#030914] shadow-[0_30px_120px_rgba(0,0,0,0.6)]" />
+              <div className="absolute inset-[15%] rounded-full bg-white/5 " />
               <div className="absolute inset-[15%] rounded-full border border-accent/70" />
-              <div className="absolute inset-[26%] flex items-center justify-center rounded-full bg-[#061526] shadow-[0_20px_60px_rgba(5,18,33,0.75)]">
+              <div className="absolute inset-[26%] flex items-center justify-center rounded-full bg-white/5 ">
                 <div
-                  className="h-[64%] w-[64%] rounded-full border border-accent/40 "
+                  className="h-[64%] w-[64%] rounded-full  "
                   style={{
                     backgroundImage: "url('/banner-glob.png')",
                     backgroundSize: "cover",
@@ -121,17 +130,30 @@ export default function BannerSection() {
                   }}
                 />
               </div>
-              <div className="absolute inset-[5%] rounded-full border border-dashed border-white/20" />
-              {orbitIcons.map((icon) => (
-                <OrbitIcon
-                  key={icon.id}
-                  className={icon.className}
-                  label={icon.label}
-                  shortLabel={icon.shortLabel}
-                  imageSrc={icon.imageSrc}
-                />
-              ))}
-              
+              <div className="absolute inset-[5%]" style={orbitAnimationStyle}>
+                <div className="relative h-full w-full">
+                  <div className="absolute inset-0 rounded-full border-3 border-dashed border-white" />
+                  <div className="orbit-rotator absolute inset-0">
+                    {orbitHighlights.map((icon) => (
+                      <OrbitHighlight
+                        key={icon.id}
+                        className={icon.className}
+                        label={icon.label}
+                        imageSrc={icon.imageSrc}
+                        variant={icon.variant}
+                      />
+                    ))}
+                    {orbitIcons.map((icon) => (
+                      <OrbitIcon
+                        key={icon.id}
+                        className={icon.className}
+                        label={icon.label}
+                        imageSrc={icon.imageSrc}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -221,6 +243,65 @@ function FloatingBadge({
   );
 }
 
+type OrbitHighlightVariant = "growth" | "rating";
+
+function OrbitHighlight({
+  className,
+  label,
+  imageSrc,
+  variant,
+}: {
+  className?: string;
+  label: string;
+  imageSrc: string;
+  variant: OrbitHighlightVariant;
+}) {
+  const wrapperClass = [
+    "orbit-item absolute flex flex-col items-center text-center text-xs text-white",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  if (variant === "rating") {
+    return (
+      <div className={wrapperClass} aria-label={label}>
+        <div className="orbit-item-counter rounded-xl bg-white px-4 py-3 shadow-[0_22px_60px_rgba(6,14,26,0.55)]">
+          <div className="flex h-full w-[180px] items-center justify-center">
+            <Image
+              src={imageSrc}
+              alt={label}
+              width={198}
+              height={81}
+              className="h-auto w-full max-w-[198px] object-contain"
+              quality={100}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (variant === "growth") {
+    return (
+      <div className={wrapperClass} aria-label={label}>
+        <div className="orbit-item-counter flex h-[112px] w-[220px] items-center justify-center">
+          <Image
+            src={imageSrc}
+            alt={label}
+            width={128}
+            height={107}
+            className="h-auto w-full max-w-[140px] object-contain drop-shadow-[0_24px_60px_rgba(3,11,23,0.55)]"
+            quality={100}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  return null;
+}
+
 function OrbitIcon({
   className,
   label,
@@ -235,27 +316,29 @@ function OrbitIcon({
   return (
     <div
       className={[
-        "absolute flex flex-col items-center gap-2 text-center text-xs text-white",
+        "orbit-item absolute flex flex-col items-center text-center text-xs text-white",
         className,
       ]
         .filter(Boolean)
         .join(" ")}
       aria-label={label}
     >
-      {imageSrc ? (
-        <Image
-          src={imageSrc}
-          alt={label}
-          width={48}
-          height={48}
-          className="h-full w-22 object-cover "
-          quality={100}
-        />
-      ) : (
-        <span className="flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/10 text-sm font-semibold uppercase tracking-[0.12em] backdrop-blur-sm">
-          {shortLabel}
-        </span>
-      )}
+      <div className="orbit-item-counter flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_18px_44px_rgba(5,13,28,0.55)]">
+        {imageSrc ? (
+          <Image
+            src={imageSrc}
+            alt={label}
+            width={28}
+            height={28}
+            className="h-7 w-7 object-contain"
+            quality={100}
+          />
+        ) : (
+          <span className="text-sm font-semibold uppercase tracking-[0.12em]">
+            {shortLabel}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

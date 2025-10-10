@@ -120,3 +120,44 @@ a {
 .animate-spin-slow {
   animation: spin-slow 28s linear infinite;
 }
+
+@keyframes spin-slower {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slower {
+  animation: spin-slower 42s linear infinite;
+}
+
+@keyframes orbit-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes orbit-rotate-counter {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+.orbit-rotator {
+  animation: orbit-rotate var(--orbit-duration, 32s) linear infinite;
+  transform-origin: 50% 50%;
+}
+
+.orbit-item-counter {
+  animation: orbit-rotate-counter var(--orbit-duration, 32s) linear infinite;
+  transform-origin: 50% 50%;
+}

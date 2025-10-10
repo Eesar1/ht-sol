@@ -1,11 +1,18 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { SERVICES } from "@/constant";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 import { Button } from "@/ui/button";
 
-const SERVICE_GLYPHS = ["Ads", "UX", "AI", "Dev", "Brand"];
+const SERVICE_ICONS: { src: string; alt: string }[] = [
+  { src: "/ads.svg", alt: "Advertising services icon" },
+  { src: "/social.svg", alt: "User experience icon" },
+  { src: "/setting.svg", alt: "AI services icon" },
+  { src: "/video.svg", alt: "Development services icon" },
+  { src: "/mail.svg", alt: "Brand services icon" },
+];
 
 export default function ServicesSection() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -65,12 +72,12 @@ export default function ServicesSection() {
           <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start ">
             <div className="mt-8 space-y-6  text-white" data-animate="fade-up">
               <p className="section-heading">What We Offer</p>
-              <Button href="#contact" icon={<ArrowIcon />}>
+              <Button href="#contact" icon={<ArrowTopRightIcon />}>
                 Get In Touch
               </Button>
             </div>
             <div
-              className="max-w-xl text-base leading-relaxed text-muted-60"
+              className="max-w-xl text-base leading-relaxed text-white"
               data-animate="fade-up"
             >
               We specialize in CGI and Mixed Reality Ads, 3D Animations, Web
@@ -156,37 +163,68 @@ function ServiceCard({
   variant = "default",
 }: ServiceCardProps) {
   const baseClasses =
-    "group relative flex h-full flex-col items-center rounded-[32px] border border-white/12 bg-[#070f19]/90 px-8 pb-12 pt-14 text-center text-muted-60 transition-all duration-300 hover:border-accent/50";
+    "relative flex h-full flex-col items-center rounded-l border border-white/12 bg-black/5 text-center text-white shadow-none transition-all duration-300 hover:border-accent/50";
+  const hoverShadowClass =
+    "hover:shadow-[0_20px_60px_rgba(0,131,138,0.25)]";
+  const defaultClasses = "px-6 pt-7 pb-10 min-h-[200px]";
   const featuredClasses =
-    "border-accent/60 bg-[#061624]/95 shadow-[0_22px_88px_rgba(0,131,138,0.25)]";
+    "px-8 pt-9 pb-12 min-h-[500px] border-accent/60 ";
 
-  const arrowBaseClasses =
-    "inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-deep-900 transition-transform duration-300 group-hover:-translate-y-1";
-  const arrowFeaturedClasses =
-    "bg-white text-accent shadow-[0_12px_42px_rgba(0,0,0,0.35)]";
+  const featuredArrowClasses =
+    "relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-none transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-white group-hover:text-deep-900 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]";
+  const defaultArrowClasses =
+    "relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-none transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-white group-hover:text-deep-900 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]";
 
   return (
     <div
-      className={`${baseClasses} ${
-        variant === "featured" ? featuredClasses : ""
+      className={`group relative flex flex-col items-center ${
+        variant === "default" ? "" : ""
       }`}
       data-animate="fade-up"
     >
-      <ServiceIcon index={index} variant={variant} />
-      <h3 className="mt-8 text-base font-semibold uppercase tracking-[0.2em] text-white">
-        {title}
-      </h3>
-      <p className="mt-4 text-sm leading-relaxed text-muted-50">{description}</p>
+      <div
+        className={`${baseClasses} ${hoverShadowClass} ${
+          variant === "featured" ? featuredClasses : defaultClasses
+        }`}
+      >
+        <ServiceIcon index={index} variant={variant} />
+        <h3 className="mt-8 text-base font-semibold uppercase tracking-[0.2em] text-white">
+          {title}
+        </h3>
+        <p className="mt-4 text-sm leading-relaxed text-white">
+          {description}
+        </p>
 
-      <div className="mt-12 flex w-full justify-center">
-        <span
-          className={`${arrowBaseClasses} ${
-            variant === "featured" ? arrowFeaturedClasses : ""
-          }`}
-        >
-          <ArrowMiniIcon />
-        </span>
+        {variant === "featured" ? (
+          <div className="mt-auto flex w-full justify-center">
+            <div className="relative flex w-full max-w-[360px] flex-col items-center">
+              <span className={featuredArrowClasses}>
+                <ArrowTopRightIcon className="h-4 w-4" />
+              </span>
+              <div className="relative -mt-7 w-full overflow-hidden rounded-l border border-white/12 bg-[#040b13]/80">
+                <Image
+                  src="/social-media.png"
+                  alt="Social media engagement"
+                  width={720}
+                  height={420}
+                  className="h-77 w-full "
+                  quality={100}
+                />
+              </div>
+            </div>
+          </div>
+        ) : null}
       </div>
+
+      {variant === "default" ? (
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-5">
+          <div className="relative">
+            <span className={defaultArrowClasses}>
+              <ArrowTopRightIcon className="h-4 w-4" />
+            </span>
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -198,74 +236,78 @@ function ServiceIcon({
   index: number;
   variant?: "default" | "featured";
 }) {
-  const label = SERVICE_GLYPHS[index % SERVICE_GLYPHS.length];
+  const icon = SERVICE_ICONS[index % SERVICE_ICONS.length];
+  const baseFillClass = variant === "featured" ? "bg-white/5" : "bg-white/5";
 
   return (
     <div
-      className={`relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-accent/45 bg-[#0c1824] ${
-        variant === "featured"
-          ? "border-accent/70 bg-[#0d1f30] shadow-[0_12px_36px_rgba(0,131,138,0.25)]"
-          : ""
+      className={`relative flex h-20 w-20 items-center justify-center rounded-full border-2 border-dashed border-white bg-black ${
+        variant === "featured" ? "" : ""
       }`}
     >
       <span
-        className={`pointer-events-none absolute inset-2 rounded-full border border-white/10 ${
-          variant === "featured" ? "border-white/20" : ""
-        }`}
+        className={`pointer-events-none absolute inset-[6px] rounded-full ${baseFillClass} transition-colors duration-300 group-hover:bg-white`}
       />
-      <span className="text-sm font-semibold uppercase tracking-[0.24em] text-white">
-        {label}
-      </span>
+      <span className="pointer-events-none absolute inset-2 rounded-full " />
+      
+      {/* Icon container */}
+      <div className="relative z-10 h-10 w-10">
+        {/* White icon (visible by default) */}
+        <div className="absolute inset-0 transition-opacity duration-300 group-hover:opacity-0">
+          <Image
+            src={icon.src}
+            alt={icon.alt}
+            width={40}
+            height={40}
+            className="h-10 w-10"
+            style={{
+              filter: 'brightness(0) invert(1)',
+            }}
+          />
+        </div>
+        
+        {/* Black icon (visible on hover) */}
+        <div className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+          <Image
+            src={icon.src}
+            alt={icon.alt}
+            width={40}
+            height={40}
+            className="h-10 w-10"
+            style={{
+              filter: 'brightness(0)',
+            }}
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
-function ArrowIcon() {
+function ArrowTopRightIcon({
+  className,
+  color = "currentColor",
+}: {
+  className?: string;
+  color?: string;
+}) {
   return (
     <svg
-      width="14"
-      height="14"
+      className={className ?? "h-3.5 w-3.5"}
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M3 11L11 3"
-        stroke="currentColor"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5 3H11V9"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function ArrowMiniIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5 11L11 5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6 5H11V10"
-        stroke="currentColor"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

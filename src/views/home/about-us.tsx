@@ -58,9 +58,29 @@ export default function AboutUsSection() {
                   </div>
                 </div>
               </div>
-              <div className="absolute -right-18 top-[-14%] hidden h-28 w-28 items-center justify-center rounded-full border border-accent/40 bg-white/5 text-accent shadow-[0_25px_65px_rgba(5,26,41,0.6)] backdrop-blur-md md:flex">
-                <div className="flex h-24 w-24 items-center justify-center rounded-full border border-dashed border-accent/50 text-xs font-semibold uppercase tracking-[0.4em]">
-                  <span className="-rotate-45">HT</span>
+              <div className="absolute -right-18 top-[-14%] hidden h-28 w-28 items-center justify-center rounded-full border border-accent/40 bg-accent text-white shadow-[0_25px_65px_rgba(5,26,41,0.6)] backdrop-blur-md md:flex">
+                <div className="relative flex h-full w-full items-center justify-center">
+                  <svg
+                    viewBox="0 0 100 100"
+                    className="absolute inset-3 h-[calc(100%-1.5rem)] w-[calc(100%-1.5rem)] text-white animate-spin-slower"
+                    aria-hidden
+                  >
+                    <defs>
+                      <path
+                        id="about-circle-text-path"
+                        d="M50 10a40 40 0 1 1 0 80 40 40 0 1 1 0-80"
+                        fill="none"
+                      />
+                    </defs>
+                    <text fill="currentColor" fontSize="15" fontWeight="600">
+                      <textPath xlinkHref="#about-circle-text-path">
+                        HT SOLUTIONS{"\u00A0\u00A0\u00A0\u00A0"}HT SOLUTIONS{"\u00A0\u00A0\u00A0"}
+                      </textPath>
+                    </text>
+                  </svg>
+                  <span className="relative flex h-14 w-14 items-center justify-center text-white">
+                    <ArrowTopRightIcon className="h-7 w-7" color="#ffffff" />
+                  </span>
                 </div>
               </div>
             </div>
@@ -88,25 +108,30 @@ export default function AboutUsSection() {
   );
 }
 
-function ArrowTopRightIcon() {
+function ArrowTopRightIcon({
+  className,
+  color = "currentColor",
+}: {
+  className?: string;
+  color?: string;
+}) {
   return (
     <svg
-      width="14"
-      height="14"
+      className={className ?? "h-3.5 w-3.5"}
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M3 11L11 3"
-        stroke="currentColor"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M5 3H11V9"
-        stroke="currentColor"
+        stroke={color}
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"

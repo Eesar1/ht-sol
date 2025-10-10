@@ -10,29 +10,29 @@ export const NAV_LINKS = [
 
 export const SERVICES = [
   {
-    title: "Brand-First Web Design",
+    title: "Service Name Here",
     description:
-      "Immersive, conversion-ready websites tailored to your business vision.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    title: "Mobile App Development",
+    title: "Service Name Here",
     description:
-      "Cross-platform experiences engineered for speed, scale, and delight.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    title: "Performance Marketing",
+    title: "Service Name Here",
     description:
-      "Data-backed growth campaigns covering SEO, SEM, and social activation.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    title: "Product UI/UX Design",
+    title: "Service Name Here",
     description:
-      "Interface systems that balance storytelling, accessibility, and clarity.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
   {
-    title: "Video & Motion Content",
+    title: "Service Name Here",
     description:
-      "High-impact visuals, motion graphics, and explainers to stand out.",
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
   },
 ];
 
