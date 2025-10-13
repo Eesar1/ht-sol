@@ -16,29 +16,55 @@ export default function TechnologiesSection() {
     <section
       id="technologies"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 pt-6 lg:pt-12"
+      className="relative z-10 scroll-mt-24 overflow-hidden  pt-6 lg:pt-12"
+      style={{
+        background:
+          "linear-gradient(180deg, #0A0909 0%, #0A0909 55%, rgba(0, 0, 0, 0.85) 78%, #000000 100%)",
+      }}
     >
       <div className="section-container">
         <div
-          className="relative overflow-hidden rounded-[36px] border border-white/10 bg-white/5 px-6 py-12 backdrop-blur-xl"
+          className="relative px-6 py-12 "
           data-animate="fade-up"
         >
-          <span className="pointer-events-none absolute left-1/2 top-2 -z-10 hidden w-full -translate-x-1/2 text-center font-display text-[8rem] uppercase tracking-[0.35em] text-white/5 md:block lg:text-[9rem]">
-            Technologies
-          </span>
-          <div className="space-y-8 text-center">
+           <svg
+  className="pointer-events-none absolute left-1/2 top-0 -z-20 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
+  viewBox="0 0 1600 260"
+  aria-hidden
+>
+  <defs>
+    {/* gradient: 135deg, #075b65 → #00838a → #328a99 */}
+    <linearGradient id="about-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stopColor="#075b65" />
+      <stop offset="50%" stopColor="#00838a" />
+      <stop offset="100%" stopColor="#328a99" />
+    </linearGradient>
+  </defs>
+
+  <text
+    x="50%" y="60%"
+    textAnchor="middle"
+    fontFamily="Poppins, var(--font-display), sans-serif"
+    fontSize="220"               /* ≈ text-[8rem]–[10rem] */
+    style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+    fill="transparent"
+    stroke="url(#about-stroke)"
+    strokeWidth="1"              /* thinner outline; try 0.8–1.2 */
+  >
+    Technologies
+  </text>
+</svg>
+          <div className="space-y-8 text-center pt-29">
             <div className="space-y-4">
-              <p className="text-sm uppercase tracking-[0.35em] text-accent/80">
-                Technologies we use
-              </p>
+
               <h2 className="section-heading mx-auto max-w-3xl text-white">
-                Trusted tools and ecosystems
+                Technologies we use
               </h2>
             </div>
           </div>
-          <div className="mt-10 overflow-hidden">
+          <div className="mt-10 ">
             <div className="relative flex w-[200%] items-center gap-6">
-              <div className="flex w-full items-center gap-6 animate-tech-marquee">
+              <div className="flex w-full items-center gap-6 animate-tech-marquee whitespace-nowrap">
                 {marqueeItems.map((tech, index) => (
                   <TechBadge key={`${tech.name}-${index}`} label={tech.name} />
                 ))}
@@ -47,6 +73,10 @@ export default function TechnologiesSection() {
           </div>
         </div>
       </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2 -z-10 bg-gradient-to-b from-transparent via-black/80 to-black blur-3xl opacity-90"
+      />
     </section>
   );
 }

@@ -2,6 +2,10 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import CloseIcon from "@/components/CloseIcon";
+import MenuIcon from "@/components/MenuIcon";
+import PhoneCTA from "@/components/PhoneCTA";
 import { NAV_LINKS } from "@/constant";
 import { Button } from "@/ui/button";
 import Image from "next/image";
@@ -74,7 +78,9 @@ export default function Navbar() {
                   );
                 })}
               </div>
-              <ContactCTA />
+              <Button href="#contact" icon={<ArrowTopRightIcon />}>
+                Contact Us
+              </Button>
             </div>
           </div>
         </nav>
@@ -125,130 +131,19 @@ export default function Navbar() {
                 })}
               </div>
               <div className="mt-6 flex flex-col gap-3">
-                <ContactCTA onClick={() => setOpen(false)} />
                 <Button
-                  href="tel:+923174201604"
-                  variant="outline"
-                  icon={<PhoneIcon />}
+                  href="#contact"
+                  icon={<ArrowTopRightIcon />}
+                  onClick={() => setOpen(false)}
                 >
-                  +92 317 420 1604
+                  Contact Us
                 </Button>
+                <PhoneCTA onClick={() => setOpen(false)} />
               </div>
             </div>
           </div>
         ) : null}
       </div>
     </header>
-  );
-}
-
-function ContactCTA({ onClick }: { onClick?: () => void }) {
-  return (
-    <Button href="#contact" icon={<ArrowTopRightIcon />} onClick={onClick}>
-      Contact Us
-    </Button>
-  );
-}
-
-function ArrowTopRightIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 11L11 3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 3H11V9"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function MenuIcon() {
-  return (
-    <svg
-      width="18"
-      height="14"
-      viewBox="0 0 18 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 1H17"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M1 7H17"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M1 13H12"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function CloseIcon() {
-  return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 16 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 3L13 13"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M13 3L3 13"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function PhoneIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.6667 9.68688V11.0836C11.6667 11.3649 11.437 11.5903 11.1493 11.5869C10.3833 11.5781 8.82767 11.3951 7.28908 10.3352C5.51783 9.10929 4.23692 6.9411 3.77258 6.07691C3.68825 5.92048 3.68825 5.7393 3.77258 5.58287C4.23692 4.71868 5.51783 2.55049 7.28908 1.32461C8.82767 0.264682 10.3833 0.0816746 11.1493 0.0729019C11.437 -0.000934714 11.6667 0.224531 11.6667 0.505765V1.90251C11.6667 2.15353 11.4883 2.37262 11.2427 2.42236L9.691 2.73538C9.46417 2.7805 9.30275 2.9852 9.327 3.21374C9.37858 3.69944 9.30983 4.2311 8.81058 4.69666C8.42092 5.05908 8.45117 5.64025 8.81058 6.00267L9.077 6.26204C9.93233 7.0955 10.9472 7.79766 11.6245 8.19322C11.8563 8.32666 11.9597 8.60784 11.8741 8.86065L11.2427 10.4705C11.1584 10.7052 10.9146 10.833 10.6735 10.7704C10.0732 10.6122 9.33092 10.3122 8.6885 9.81866"
-        stroke="currentColor"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

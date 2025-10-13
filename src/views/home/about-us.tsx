@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
 import { Button } from "@/ui/button";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
@@ -105,37 +106,5 @@ export default function AboutUsSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function ArrowTopRightIcon({
-  className,
-  color = "currentColor",
-}: {
-  className?: string;
-  color?: string;
-}) {
-  return (
-    <svg
-      className={className ?? "h-3.5 w-3.5"}
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 11L11 3"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 3H11V9"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

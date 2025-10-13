@@ -15,55 +15,71 @@ export default function IndustriesSection() {
       className="relative z-10 scroll-mt-24 pt-6 lg:pt-12"
     >
       <div className="section-container">
-        <div
-          className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#040e19]/80 px-6 py-14 shadow-[0_30px_90px_rgba(1,8,18,0.55)] backdrop-blur-xl"
-          data-animate="fade-up"
-        >
-          <span className="pointer-events-none absolute left-1/2 top-4 -z-10 hidden w-full -translate-x-1/2 text-center font-display text-[8rem] uppercase tracking-[0.35em] text-white/4 md:block lg:text-[10rem]">
-            Industries
-          </span>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-sm uppercase tracking-[0.35em] text-accent/80">
+        <div className="relative px-6 py-14" data-animate="fade-up">
+ <svg
+  className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
+  viewBox="0 0 1600 260"
+  aria-hidden
+>
+  <defs>
+    {/* gradient: 135deg, #075b65 → #00838a → #328a99 */}
+    <linearGradient id="about-stroke" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stopColor="#075b65" />
+      <stop offset="50%" stopColor="#00838a" />
+      <stop offset="100%" stopColor="#328a99" />
+    </linearGradient>
+  </defs>
+
+  <text
+    x="50%" y="60%"
+    textAnchor="middle"
+    fontFamily="Poppins, var(--font-display), sans-serif"
+    fontSize="220"               /* ≈ text-[8rem]–[10rem] */
+    style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+    fill="transparent"
+    stroke="url(#about-stroke)"
+    strokeWidth="1"              /* thinner outline; try 0.8–1.2 */
+  >
+    Industries
+  </text>
+</svg>
+          <div className="mx-auto py-10 max-w-3xl text-center">
+
+            <h2 className="mt-20 section-heading text-white">
               Industries we serve
-            </p>
-            <h2 className="mt-4 section-heading text-white">
-              Sector expertise at scale
             </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-70">
-              Specialized squads support each vertical with research-driven
-              design systems and measurable growth programs.
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, quo, cum aliquid quia ad nesciunt explicabo voluptatem numquam sapiente sequi, culpa ex. 
             </p>
           </div>
-          <div className="mt-12 overflow-hidden rounded-[28px] border border-white/10">
-            <div className="grid grid-cols-2 overflow-hidden sm:grid-cols-5">
-              {INDUSTRIES.map((industry, index) => {
-                const isLastColumn = (index + 1) % 5 === 0;
-                const isLastRow = index >= INDUSTRIES.length - 5;
-                const borders = [
-                  !isLastColumn ? "sm:border-r border-white/10" : "",
-                  !isLastRow ? "border-b border-white/10" : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ");
-                return (
-                  <div
-                    key={industry.name}
-                    className={[
-                      "flex flex-col items-center justify-center gap-4 bg-white/[0.04] px-6 py-10 text-center text-muted-70 transition hover:bg-white/[0.08]",
-                      borders,
-                    ].join(" ")}
-                    data-animate="fade-up"
-                  >
-                    <span className="flex h-16 w-16 items-center justify-center rounded-full border border-dashed border-accent/35 bg-white/5 text-sm font-semibold uppercase tracking-[0.22em] text-accent/80">
-                      {getInitials(industry.name)}
-                    </span>
-                    <span className="text-sm font-semibold uppercase tracking-[0.28em] text-white">
-                      {industry.name}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
+          <div className="mt-12 grid grid-cols-2 sm:grid-cols-5">
+            {INDUSTRIES.map((industry, index) => {
+              const isLastColumn = (index + 1) % 5 === 0;
+              const isLastRow = index >= INDUSTRIES.length - 5;
+              const borders = [
+                !isLastColumn ? "border-r border-primary" : "",
+                !isLastRow ? "border-b border-primary" : "",
+              ]
+                .filter(Boolean)
+                .join(" ");
+              return (
+                <div
+                  key={industry.name}
+                  className={[
+                    "flex flex-col items-center justify-center gap-4 px-6 py-10 text-center text-primary",
+                    borders,
+                  ].join(" ")}
+                  data-animate="fade-up"
+                >
+                  <span className="text-2xl font-semibold tracking-[0.18em] text-white">
+                    {getInitials(industry.name)}
+                  </span>
+                  <span className="text-sm font-semibold uppercase tracking-[0.28em] text-white">
+                    {industry.name}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

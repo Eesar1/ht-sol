@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
 import { NAV_LINKS } from "@/constant";
 
 export default function Footer() {
@@ -123,32 +124,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
-}
-
-function ArrowTopRightIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 11L11 3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 3H11V9"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

@@ -1,26 +1,40 @@
 "use client";
 
-import { useRef, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
+import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import OrbitHighlight, {
+  type OrbitHighlightVariant,
+} from "@/components/OrbitHighlight";
+import OrbitIcon from "@/components/OrbitIcon";
+import PhoneCTA from "@/components/PhoneCTA";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 import { Button } from "@/ui/button";
+import { GLOBE_WAVE_PATH } from "@/constant";
 
 
-const orbitHighlights = [
- 
+type OrbitHighlightConfig = {
+  id: string;
+  label: string;
+  className: string;
+  imageSrc: string;
+  variant: OrbitHighlightVariant;
+};
+
+const orbitHighlights: OrbitHighlightConfig[] = [
   {
     id: "rating",
     label: "Customer Rating",
     className: "top-[2%] right-[-6%]",
     imageSrc: "/ratings.png",
-    variant: "rating" as const,
+    variant: "rating",
   },
   {
     id: "growth",
     label: "Growth Rate",
     className: "bottom-[-4%] left-[-5%]",
     imageSrc: "/growth.png",
-    variant: "growth" as const,
+    variant: "growth",
   },
 ];
 
@@ -29,7 +43,7 @@ const orbitIcons = [
     id: "google",
     label: "Google Ads",
     className: "top-[3%] left-[18%]",
-    imageSrc: "/google-ads.svg",
+    imageSrc: "/laptop.svg",
   },
   {
     id: "Google",
@@ -61,8 +75,37 @@ const orbitAnimationStyle = {
   "--orbit-duration": "32s",
 } as CSSProperties;
 
+
 export default function BannerSection() {
   const containerRef = useRef<HTMLElement>(null);
+  const [shouldAnimateGlobe, setShouldAnimateGlobe] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setShouldAnimateGlobe(!event.matches);
+    };
+
+    setShouldAnimateGlobe(!mediaQuery.matches);
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", handleChange);
+      return () => {
+        mediaQuery.removeEventListener("change", handleChange);
+      };
+    }
+
+    mediaQuery.addListener(handleChange);
+
+    return () => {
+      mediaQuery.removeListener(handleChange);
+    };
+  }, []);
+
   useGsapReveal(containerRef, { y: 80, stagger: 0.08 });
   return (
     <section
@@ -108,7 +151,9 @@ export default function BannerSection() {
               className="flex flex-col gap-4 sm:flex-row sm:items-center"
               data-animate="fade-up"
             >
-              <GetInTouchCTA />
+              <Button href="#contact" icon={<ArrowTopRightIcon />}>
+                Get In Touch
+              </Button>
               <PhoneCTA />
             </div>
           </div>
@@ -160,16 +205,73 @@ export default function BannerSection() {
       </div>
 
       <div
-        className="relative z-10  flex flex-col items-center gap-6"
+        className="relative z-10 mt-10 flex flex-col items-center gap-8"
         data-animate="fade-up"
       >
-        <Image
-          src="/globe-line.png"
-          alt="Orbital line accent"
-          width={1920}
-          height={286}
-          className="h-auto w-full "
-        />
+        <div className="relative w-full">
+          <Image
+            src="/globe-line.png"
+            alt="Orbital line accent"
+            width={1920}
+            height={286}
+            className="h-auto w-full"
+            priority
+          />
+          <svg
+            viewBox="0 0 1920 286"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+            aria-hidden="true"
+          >
+            <defs>
+              <path id="banner-globe-path" d={GLOBE_WAVE_PATH} />
+            </defs>
+
+            {shouldAnimateGlobe ? (
+              <g>
+                <g>
+                  <image
+                    href="/globe-for-line.svg"
+                    width="96"
+                    height="102"
+                    x="-48"
+                    y="-51"
+                    opacity="0.95"
+                  />
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from="0 0 0"
+                    to="360 0 0"
+                    dur="10s"
+                    repeatCount="indefinite"
+                  />
+                </g>
+                <animateMotion
+                  dur="14s"
+                  repeatCount="indefinite"
+                  keyTimes="0;0.5;1"
+                  keyPoints="0;1;0"
+                  calcMode="spline"
+                  keySplines="0.42 0 0.58 1;0.42 0 0.58 1"
+                  rotate="0"
+                >
+                  <mpath xlinkHref="#banner-globe-path" href="#banner-globe-path" />
+                </animateMotion>
+              </g>
+            ) : (
+              <image
+                href="/globe-for-line.svg"
+                width="100%"
+                height="100%"
+                x="912"
+                y="173"
+                opacity="0.95"
+              />
+            )}
+          </svg>
+        </div>
+
         <Image
           src="/explore.svg"
           alt="Explore Now indicator"
@@ -179,213 +281,5 @@ export default function BannerSection() {
         />
       </div>
     </section>
-  );
-}
-
-function GetInTouchCTA() {
-  return (
-    <Button href="#contact" icon={<ArrowTopRightIcon />}>
-      Get In Touch
-    </Button>
-  );
-}
-
-function PhoneCTA() {
-  return (
-    <a
-      href="tel:+923174201604"
-      className="group relative inline-flex items-center  focus-visible:outline-offset-2 focus-visible:outline-accent"
-    >
-      <span className="inline-flex border-r-0 h-11 items-center whitespace-nowrap rounded-full border border-white bg-transparent px-6 text-sm font-semibold uppercase tracking-[0.08em] text-white transition-colors duration-300 group-hover:border-accent/70 group-hover:bg-white/10 group-hover:text-white">
-        +92 317 420 1604
-      </span>
-      <span className="-ml-2 border-l-0  flex h-11 w-11 items-center justify-center rounded-full  border border-white bg-transparent text-white transition-colors duration-300 group-hover:border-accent/70 group-hover:bg-white/10 group-hover:text-deep-900">
-        <Image
-          src="/call.svg"
-          width={18}
-          height={18}
-          alt="Call us"
-          className="transition-[filter] duration-300 group-hover:invert"
-        />
-      </span>
-    </a>
-  );
-}
-
-function FloatingBadge({
-  className,
-  title,
-  description,
-  image,
-}: {
-  className?: string;
-  title: string;
-  description: string;
-  image: string;
-}) {
-  return (
-    <div
-      className={[
-        "absolute z-10 flex max-w-[200px] flex-col gap-1 rounded-2xl border border-white/10 bg-[#071522]/95 px-4 py-3 text-left text-xs text-white shadow-[0_20px_60px_rgba(1,8,18,0.65)] backdrop-blur-lg transition-transform duration-500 hover:scale-[1.03]",
-        className,
-      ].join(" ")}
-      style={{
-        backgroundImage: `url('${image}')`,
-        backgroundSize: "cover",
-        backgroundBlendMode: "overlay",
-      }}
-    >
-      <span className="text-sm font-semibold leading-tight text-white">
-        {title}
-      </span>
-      <span className="text-[0.7rem] text-muted-70">{description}</span>
-    </div>
-  );
-}
-
-type OrbitHighlightVariant = "growth" | "rating";
-
-function OrbitHighlight({
-  className,
-  label,
-  imageSrc,
-  variant,
-}: {
-  className?: string;
-  label: string;
-  imageSrc: string;
-  variant: OrbitHighlightVariant;
-}) {
-  const wrapperClass = [
-    "orbit-item absolute flex flex-col items-center text-center text-xs text-white",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
-
-  if (variant === "rating") {
-    return (
-      <div className={wrapperClass} aria-label={label}>
-        <div className="orbit-item-counter rounded-xl bg-white px-4 py-3 shadow-[0_22px_60px_rgba(6,14,26,0.55)]">
-          <div className="flex h-full w-[180px] items-center justify-center">
-            <Image
-              src={imageSrc}
-              alt={label}
-              width={198}
-              height={81}
-              className="h-auto w-full max-w-[198px] object-contain"
-              quality={100}
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (variant === "growth") {
-    return (
-      <div className={wrapperClass} aria-label={label}>
-        <div className="orbit-item-counter flex h-[112px] w-[220px] items-center justify-center">
-          <Image
-            src={imageSrc}
-            alt={label}
-            width={128}
-            height={107}
-            className="h-auto w-full max-w-[140px] object-contain drop-shadow-[0_24px_60px_rgba(3,11,23,0.55)]"
-            quality={100}
-          />
-        </div>
-      </div>
-    );
-  }
-
-  return null;
-}
-
-function OrbitIcon({
-  className,
-  label,
-  shortLabel,
-  imageSrc,
-}: {
-  className?: string;
-  label: string;
-  shortLabel?: string;
-  imageSrc?: string;
-}) {
-  return (
-    <div
-      className={[
-        "orbit-item absolute flex flex-col items-center text-center text-xs text-white",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      aria-label={label}
-    >
-      <div className="orbit-item-counter flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-900 shadow-[0_18px_44px_rgba(5,13,28,0.55)]">
-        {imageSrc ? (
-          <Image
-            src={imageSrc}
-            alt={label}
-            width={28}
-            height={28}
-            className="h-7 w-7 object-contain"
-            quality={100}
-          />
-        ) : (
-          <span className="text-sm font-semibold uppercase tracking-[0.12em]">
-            {shortLabel}
-          </span>
-        )}
-      </div>
-    </div>
-  );
-}
-
-
-function StarIcon() {
-  return (
-    <svg
-      aria-hidden
-      width="12"
-      height="12"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="text-accent"
-    >
-      <path
-        d="M9.99987 2.5L12.2853 7.13305L17.3926 7.90983L13.6962 11.4869L14.5707 16.5902L9.99987 14.115L5.429 16.5902L6.30352 11.4869L2.60718 7.90983L7.71444 7.13305L9.99987 2.5Z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
-
-function ArrowTopRightIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 11L11 3"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5 3H11V9"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }
