@@ -1,20 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
+import Container from "@/components/container";
 import { INDUSTRIES } from "@/constant";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 export default function IndustriesSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   useGsapReveal(containerRef, { y: 60, stagger: 0.07 });
 
   return (
     <section
       id="industries"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 pt-6 lg:pt-12"
+      className="relative z-10 scroll-mt-24 py-16 lg:py-20"
     >
-      <div className="section-container">
+      <Container >
         <div className="relative px-6 py-14" data-animate="fade-up">
  <svg
   className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
@@ -71,9 +73,15 @@ export default function IndustriesSection() {
                   ].join(" ")}
                   data-animate="fade-up"
                 >
-                  <span className="text-2xl font-semibold tracking-[0.18em] text-white">
-                    {getInitials(industry.name)}
-                  </span>
+                  <div className="flex h-16 w-16 items-center justify-center ">
+                    <Image
+                      src={industry.icon}
+                      alt={`${industry.name} icon`}
+                      width={48}
+                      height={48}
+                      className="h-10 w-10 object-contain"
+                    />
+                  </div>
                   <span className="text-sm font-semibold uppercase tracking-[0.28em] text-white">
                     {industry.name}
                   </span>
@@ -82,15 +90,7 @@ export default function IndustriesSection() {
             })}
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
-}
-
-function getInitials(label: string) {
-  return label
-    .split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2);
 }

@@ -2,20 +2,21 @@
 
 import { useRef } from "react";
 import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import Container from "@/components/container";
 import { Button } from "@/ui/button";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
 
 export default function AboutUsSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   useGsapReveal(containerRef, { y: 60, stagger: 0.08 });
 
   return (
     <section
       id="about"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 pt-8 lg:pt-10"
+      className="relative z-10 scroll-mt-24 py-16 lg:py-20"
     >
-      <div className="section-container">
+      <Container >
         <div className="relative pt-14 md:pt-20">
           <svg
   className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
@@ -104,7 +105,7 @@ export default function AboutUsSection() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

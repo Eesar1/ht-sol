@@ -21,6 +21,11 @@ export const metadata: Metadata = {
   title: "HT Solutions | Digital Agency",
   description:
     "HT Solutions crafts premium digital experiences spanning web, mobile, branding, and performance marketing.",
+  icons: {
+    icon: "/banner-globe.png",
+    shortcut: "/banner-globe.png",
+    apple: "/banner-globe.png",
+  },
 };
 
 export default function RootLayout({

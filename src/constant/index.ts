@@ -37,29 +37,28 @@ export const SERVICES = [
 ];
 
 export const TECHNOLOGIES = [
-  { name: "Adobe XD" },
-  { name: "Figma" },
-  { name: "Shopify" },
-  { name: "Webflow" },
-  { name: "Laravel" },
-  { name: "WordPress" },
-  { name: "Elementor" },
-  { name: "VS Code" },
-  { name: "React Native" },
-  { name: "After Effects" },
+  { name: "Adobe XD", icon: "/adobe-XD.svg" },
+  { name: "Adobe Ai", icon: "/adobe-ai.svg" },
+  { name: "Shopify", icon: "/shopify.svg" },
+  { name: "Web Flow", icon: "/web-flow.svg" },
+  { name: "Laravel", icon: "/laravel.svg" },
+  { name: "Wordpress", icon: "/wordpress.svg" },
+  { name: "Elementor", icon: "/elementor.svg" },
+  { name: "VS Code", icon: "/vs-code.svg" },
+  { name: "Visual Studio", icon: "/visual-studio.svg" },
 ];
 
 export const INDUSTRIES = [
-  { name: "Education" },
-  { name: "Healthcare" },
-  { name: "E-Commerce" },
-  { name: "Travel" },
-  { name: "Construction" },
-  { name: "Fitness" },
-  { name: "Food" },
-  { name: "Insurance" },
-  { name: "Automotive" },
-  { name: "Real Estate" },
+  { name: "Education", icon: "/education.svg" },
+  { name: "Healthcare", icon: "/helthcare.svg" },
+  { name: "E-Commerce", icon: "/e-comerce.svg" },
+  { name: "Travel", icon: "/travel.svg" },
+  { name: "Construction", icon: "/construction.svg" },
+  { name: "Fitness", icon: "/fitness.svg" },
+  { name: "Food", icon: "/food.svg" },
+  { name: "Insurance", icon: "/insurance.svg" },
+  { name: "Automotive", icon: "/automotive.svg" },
+  { name: "Real Estate", icon: "/real-estate.svg" },
 ];
 // Path extracted from `public/globe-line.png` for the hero globe animation.
 export const GLOBE_WAVE_PATH = [

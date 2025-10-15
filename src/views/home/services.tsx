@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import Container from "@/components/container";
 import ServiceCard from "@/components/ServiceCard";
 import { SERVICES } from "@/constant";
 import { useGsapReveal } from "@/hooks/useGsapReveal";
@@ -16,7 +17,7 @@ const SERVICE_ICONS: { src: string; alt: string }[] = [
 ];
 
 export default function ServicesSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   useGsapReveal(containerRef, { y: 64, stagger: 0.08 });
 
   const servicesWithIndex = SERVICES.map((service, index) => ({
@@ -37,16 +38,16 @@ export default function ServicesSection() {
     <section
       id="services"
       ref={containerRef}
-      className="relative z-10 scroll-mt-24 overflow-hidden pt-12 pb-16 lg:pt-20 lg:pb-28"
+      className="relative z-10 scroll-mt-24 overflow-hidden py-16 lg:py-20"
     >
       <div
         className="pointer-events-none absolute inset-0 -z-30"
         style={{
           background:
-            "linear-gradient(180deg, #000000 0%, #000000 50%, #0A0909 100%)",
+            "linear-gradient(#000000 0%,#0A0909 60%, #0A0909 100%)",
         }}
       />
-      <div className="section-container">
+      <Container>
         <div className="flex justify-center">
           <svg
             className="pointer-events-none absolute left-1/2 top-0 -z-20 hidden md:block -translate-x-1/2 w-[min(1500px,150%)]"
@@ -77,15 +78,15 @@ export default function ServicesSection() {
         </div>
 
         <div className="relative mt-4 px-6 pb-12 pt-25 lg:px-12 ">
-          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start ">
-            <div className="mt-8 space-y-6  text-white" data-animate="fade-up">
+          <div className="relative grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-stretch">
+            <div className="mt-8 space-y-6 text-white" data-animate="fade-up">
               <p className="section-heading">What We Offer</p>
               <Button href="#contact" icon={<ArrowTopRightIcon />}>
                 Get In Touch
               </Button>
             </div>
-            <div
-              className="max-w-xl text-base leading-relaxed text-white"
+            <p
+              className="max-w-xl text-base leading-relaxed text-white mt-6 lg:mt-0 lg:pt-4"
               data-animate="fade-up"
             >
               We specialize in CGI and Mixed Reality Ads, 3D Animations, Web
@@ -93,7 +94,7 @@ export default function ServicesSection() {
               SEO, Google Ads, and Social Media). Additionally, we provide AI
               and Custom Software Development, tailored to meet your unique
               needs.
-            </div>
+            </p>
           </div>
 
           <div className="relative mt-14">
@@ -152,7 +153,7 @@ export default function ServicesSection() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

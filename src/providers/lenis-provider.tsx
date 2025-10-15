@@ -14,7 +14,7 @@ export function LenisProvider({ children }: LenisProviderProps) {
     const lenis = new Lenis({
       duration: 1.35,
       smoothWheel: true,
-      smoothTouch: false,
+      syncTouch: false,
       lerp: 0.1,
     });
 

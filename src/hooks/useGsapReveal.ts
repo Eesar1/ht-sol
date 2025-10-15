@@ -15,7 +15,7 @@ type UseGsapRevealOptions = {
  * Keeps the animation declarative in markup so sections stay compact.
  */
 export function useGsapReveal(
-  container: RefObject<HTMLElement>,
+  container: RefObject<HTMLElement | null>,
   {
     trigger,
     stagger = 0.12,

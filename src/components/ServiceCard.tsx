@@ -35,10 +35,7 @@ export default function ServiceCard({
     "relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full bg-accent text-white shadow-none transition-all duration-300 group-hover:-translate-y-1 group-hover:bg-white group-hover:text-deep-900 group-hover:shadow-[0_12px_32px_rgba(0,0,0,0.28)]";
 
   return (
-    <div
-      className="group relative flex flex-col items-center"
-      data-animate="fade-up"
-    >
+    <div className="group relative flex h-full flex-col items-center" data-animate="fade-up">
       <div
         className={`${baseClasses} ${hoverShadowClass} ${
           variant === "featured" ? featuredClasses : defaultClasses
@@ -48,7 +45,7 @@ export default function ServiceCard({
         <h3 className="mt-8 text-base font-semibold uppercase tracking-[0.2em] text-white">
           {title}
         </h3>
-        <p className="mt-4 text-sm leading-relaxed text-white">
+        <p className="mt-6 text-sm leading-relaxed text-white">
           {description}
         </p>
 

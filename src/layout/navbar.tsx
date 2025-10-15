@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
 import CloseIcon from "@/components/CloseIcon";
+import Container from "@/components/container";
 import MenuIcon from "@/components/MenuIcon";
 import PhoneCTA from "@/components/PhoneCTA";
 import { NAV_LINKS } from "@/constant";
@@ -39,14 +40,14 @@ export default function Navbar() {
 
   return (
     <header className="relative z-30">
-      <div className="mx-auto flex w-full max-w-[1200px] items-center justify-between  py-6 lg:py-10 overflow-hidden relative bg-cover bg-center bg-no-repeat scroll-mt-32 pt-6  ">
-      <div className="absolute inset-0 bg-[url('/image-banner.png')] bg-cover bg-center bg-no-repeat opacity-20 z-0"></div>
+      <Container className="relative flex w-full items-center justify-between overflow-hidden bg-cover bg-center bg-no-repeat py-6 scroll-mt-32 lg:py-10">
+        <div className="absolute inset-0 z-0 bg-[url('/image-banner.png')] bg-cover bg-center bg-no-repeat opacity-20"></div>
         <Link
           href="/"
         
         >
           <Image
-            src="/ht-logo.png"
+            src="/ht-Logo.png"
             alt="HT Solutions"
             width={162}
             height={48}
@@ -143,7 +144,7 @@ export default function Navbar() {
             </div>
           </div>
         ) : null}
-      </div>
+      </Container>
     </header>
   );
 }

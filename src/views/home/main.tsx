@@ -7,13 +7,13 @@ import TechnologiesSection from "@/views/home/technologies";
 
 export default function HomeView() {
   return (
-    <div className="flex flex-col gap-28 pb-24 lg:gap-32">
+    <>
       <BannerSection />
       <AboutUsSection />
       <ServicesSection />
       <TechnologiesSection />
       <OurWorkSection />
       <IndustriesSection />
-    </div>
+    </>
   );
 }

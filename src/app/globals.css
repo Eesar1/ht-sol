@@ -61,10 +61,6 @@ a {
 }
 
 @layer utilities {
-  .section-container {
-    @apply mx-auto w-full max-w-[1200px] px-6;
-  }
-
   .section-heading {
     @apply font-display text-3xl uppercase tracking-[0.1em] text-white sm:text-4xl lg:text-5xl;
   }
@@ -94,17 +90,24 @@ a {
   }
 }
 
+.marquee-track {
+  display: inline-flex;
+  width: max-content;
+  flex-wrap: nowrap;
+}
+
 @keyframes tech-marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translate3d(-50%, 0, 0);
   }
 }
 
 .animate-tech-marquee {
-  animation: tech-marquee 28s linear infinite;
+  animation: tech-marquee var(--marquee-duration, 18s) linear infinite;
+  will-change: transform;
 }
 
 @keyframes spin-slow {

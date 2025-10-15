@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image from "next/image";
 import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import Container from "@/components/container";
 import OrbitHighlight, {
   type OrbitHighlightVariant,
 } from "@/components/OrbitHighlight";
@@ -111,10 +112,10 @@ export default function BannerSection() {
     <section
       id="home"
       ref={containerRef}
-      className="relative z-10 overflow-hidden bg-cover bg-center bg-no-repeat scroll-mt-32 pt-6 lg:pt-10 xl:pt-16"
+      className="relative z-10 overflow-hidden bg-cover bg-center bg-no-repeat scroll-mt-32 py-16 lg:py-20"
     >
       <div className="absolute inset-0 bg-[url('/image-banner.png')] bg-cover bg-center bg-no-repeat opacity-10 z-0"></div>
-      <div className="section-container relative z-10">
+      <Container className="">
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
           <div className="space-y-10">
 
@@ -202,7 +203,7 @@ export default function BannerSection() {
             </div>
           </div>
         </div>
-      </div>
+      </Container>
 
       <div
         className="relative z-10 mt-10 flex flex-col items-center gap-8"

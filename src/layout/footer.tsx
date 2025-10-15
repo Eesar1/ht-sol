@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import ArrowTopRightIcon from "@/components/ArrowTopRightIcon";
+import Image from "next/image";
+import Container from "@/components/container";
 import { NAV_LINKS } from "@/constant";
 
 export default function Footer() {
@@ -10,18 +11,16 @@ export default function Footer() {
       id="contact"
       className="relative z-10 mt-28 border-t border-white/10 bg-transparent"
     >
-      <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-12 px-6 py-16 md:flex-row md:justify-between">
+      <Container className="flex w-full flex-col gap-12 py-16 md:flex-row md:justify-between">
         <div className="max-w-sm space-y-6">
-          <Link
-            href="/"
-            className="flex items-center gap-3 text-lg font-bold uppercase tracking-[0.28em]"
-          >
-            <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent/70 bg-white/10 text-accent shadow-[0_0_25px_rgba(20,180,198,0.35)]">
-              HT
-            </span>
-            <span className="font-display text-2xl tracking-[0.35em] text-white">
-              SOL
-            </span>
+          <Link href="/" className="inline-flex items-center">
+            <Image
+              src="/ht-Logo.png"
+              alt="HT Solutions"
+              width={162}
+              height={48}
+              className="h-12 w-auto select-none"
+            />
           </Link>
           <p className="text-sm text-muted-70">
             We partner with ambitious teams to craft digital products, immersive
@@ -90,26 +89,16 @@ export default function Footer() {
             <p className="mt-4 text-sm text-muted-70">
               Monthly updates on digital products, growth stories, and insights.
             </p>
-            <form className="mt-5 flex w-full items-center rounded-full border border-white/10 bg-white/5 p-1.5 shadow-[0_20px_60px_rgba(3,12,24,0.45)] backdrop-blur">
-              <input
-                type="email"
-                placeholder="Your email"
-                className="h-11 flex-1 rounded-full bg-transparent px-4 text-sm text-white placeholder:text-muted-60 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-accent text-deep-900 transition hover:bg-accent/90"
-                aria-label="Subscribe to newsletter"
-              >
-                <ArrowTopRightIcon />
-              </button>
-            </form>
+
           </div>
         </div>
-      </div>
+      </Container>
       <div className="border-t border-white/10">
-        <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-4 px-6 py-6 text-xs uppercase tracking-[0.25em] text-muted-60 sm:flex-row sm:items-center sm:justify-between">
-          <p>Copyright {new Date().getFullYear()} HT Solutions. All rights reserved.</p>
+        <Container className="flex w-full flex-col gap-4 py-6 text-xs uppercase tracking-[0.25em] text-muted-60 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            Copyright {new Date().getFullYear()} HT Solutions. All rights
+            reserved.
+          </p>
           <div className="flex flex-wrap items-center gap-6">
             <Link href="#privacy" className="transition hover:text-accent">
               Privacy
@@ -121,7 +110,7 @@ export default function Footer() {
               Sitemap
             </Link>
           </div>
-        </div>
+        </Container>
       </div>
     </footer>
   );
