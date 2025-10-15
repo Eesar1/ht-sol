@@ -21,18 +21,18 @@ export default function TechnologiesSection() {
       className="relative z-10 scroll-mt-24 overflow-hidden pt-6 lg:pt-12"
       style={{
         background:
-          "linear-gradient(180deg, #0A0909 0%, #0A0909 15%, #000000 78%, #000000 100%)",
+          "linear-gradient(180deg, #0A0909 0%, #0A0909 25%, #000000 78%, #000000 100%)",
       }}
     >
-      <Container >
+      <Container>
         <div className="relative px-6 py-16 lg:py-20" data-animate="fade-up">
           <svg
-            className="pointer-events-none absolute left-1/2 top-0 -z-20 hidden w-[min(1600px,150%)] -translate-x-1/2 md:block"
+            className="pointer-events-none absolute left-1/2 top-0 -z-20 block -translate-x-1/2 w-full max-w-[1600px]"
             viewBox="0 0 1600 260"
             aria-hidden
           >
             <defs>
-              <linearGradient id="about-stroke" x1="0" y1="0" x2="1" y2="1">
+              <linearGradient id="tech-stroke" x1="0" y1="0" x2="1" y2="1">
                 <stop offset="0%" stopColor="#075b65" />
                 <stop offset="50%" stopColor="#00838a" />
                 <stop offset="100%" stopColor="#328a99" />
@@ -45,9 +45,9 @@ export default function TechnologiesSection() {
               textAnchor="middle"
               fontFamily="Poppins, var(--font-display), sans-serif"
               fontSize="220"
-              style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+              style={{ letterSpacing: "0.00em", textTransform: "uppercase" }}
               fill="transparent"
-              stroke="url(#about-stroke)"
+              stroke="url(#tech-stroke)"
               strokeWidth="1"
             >
               Technologies
@@ -71,11 +71,11 @@ export default function TechnologiesSection() {
               </div>
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 left-0 w-24 "
+                className="pointer-events-none absolute inset-y-0 left-0 w-24"
               />
               <div
                 aria-hidden
-                className="pointer-events-none absolute inset-y-0 right-0 w-24 "
+                className="pointer-events-none absolute inset-y-0 right-0 w-24"
               />
             </div>
           </div>
@@ -91,7 +91,7 @@ export default function TechnologiesSection() {
 
 function TechBadge({ label, icon }: { label: string; icon: string }) {
   return (
-    <div className="flex h-44 w-44 shrink-0 flex-col items-center justify-center rounded-full border border-[#0ca3ad]/70 bg-white/5 text-white  transition-transform duration-500 hover:scale-105">
+    <div className="flex h-44 w-44 shrink-0 flex-col items-center justify-center rounded-full border border-[#0ca3ad]/70 bg-white/5 text-white transition-transform duration-500 hover:scale-105">
       <span className="flex h-16 w-16 items-center justify-center rounded-full">
         <img
           src={icon}

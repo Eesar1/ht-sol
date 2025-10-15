@@ -17,7 +17,7 @@ export default function OurWorkSection() {
       <Container >
         <div className="flex justify-center py-160 lg:py-200">
           <svg
-            className="pointer-events-none absolute left-1/2 top-0 -z-20 hidden md:block -translate-x-1/2 w-[min(1500px,150%)]"
+            className="pointer-events-none absolute left-1/2 top-0 -z-20 block w-[min(1600px,92vw)] -translate-x-1/2 sm:w-[min(1600px,90vw)] lg:w-[min(1600px,85vw)]"
             viewBox="0 0 1600 320"
             aria-hidden
           >

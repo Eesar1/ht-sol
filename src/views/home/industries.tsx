@@ -9,6 +9,25 @@ import { useGsapReveal } from "@/hooks/useGsapReveal";
 export default function IndustriesSection() {
   const containerRef = useRef<HTMLElement>(null);
   useGsapReveal(containerRef, { y: 60, stagger: 0.07 });
+  const totalIndustries = INDUSTRIES.length;
+  const MOBILE_COLUMNS = 2;
+  const DESKTOP_COLUMNS = 5;
+  const getLastRowStartIndex = (total: number, columns: number) => {
+    if (total === 0) {
+      return 0;
+    }
+    const remainder = total % columns;
+    const itemsInLastRow = remainder === 0 ? columns : remainder;
+    return total - itemsInLastRow;
+  };
+  const mobileLastRowStartIndex = getLastRowStartIndex(
+    totalIndustries,
+    MOBILE_COLUMNS,
+  );
+  const desktopLastRowStartIndex = getLastRowStartIndex(
+    totalIndustries,
+    DESKTOP_COLUMNS,
+  );
 
   return (
     <section
@@ -19,7 +38,7 @@ export default function IndustriesSection() {
       <Container >
         <div className="relative px-6 py-14" data-animate="fade-up">
  <svg
-  className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
+  className="pointer-events-none absolute left-1/2 top-0 -z-10 block -translate-x-1/2 w-[min(1600px,92vw)] sm:w-[min(1600px,90vw)] lg:w-[min(1600px,85vw)]"
   viewBox="0 0 1600 260"
   aria-hidden
 >
@@ -37,7 +56,7 @@ export default function IndustriesSection() {
     textAnchor="middle"
     fontFamily="Poppins, var(--font-display), sans-serif"
     fontSize="220"               /* ≈ text-[8rem]–[10rem] */
-    style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+    style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
     fill="transparent"
     stroke="url(#about-stroke)"
     strokeWidth="1"              /* thinner outline; try 0.8–1.2 */
@@ -56,11 +75,18 @@ export default function IndustriesSection() {
           </div>
           <div className="mt-12 grid grid-cols-2 sm:grid-cols-5">
             {INDUSTRIES.map((industry, index) => {
-              const isLastColumn = (index + 1) % 5 === 0;
-              const isLastRow = index >= INDUSTRIES.length - 5;
+              const isRightColumnMobile = (index + 1) % MOBILE_COLUMNS === 0;
+              const isLastRowMobile = index >= mobileLastRowStartIndex;
+              const isLastColumnDesktop = (index + 1) % DESKTOP_COLUMNS === 0;
+              const isLastRowDesktop = index >= desktopLastRowStartIndex;
               const borders = [
-                !isLastColumn ? "border-r border-primary" : "",
-                !isLastRow ? "border-b border-primary" : "",
+                isRightColumnMobile
+                  ? "border-l sm:border-l-0"
+                  : "",
+                !isLastRowMobile ? "border-b" : "",
+                !isLastColumnDesktop ? "sm:border-r" : "",
+                !isLastRowDesktop ? "sm:border-b" : "",
+                isLastRowDesktop ? "sm:border-b-0" : "",
               ]
                 .filter(Boolean)
                 .join(" ");
@@ -68,7 +94,7 @@ export default function IndustriesSection() {
                 <div
                   key={industry.name}
                   className={[
-                    "flex flex-col items-center justify-center gap-4 px-6 py-10 text-center text-primary",
+                    "flex flex-col items-center justify-center gap-4 px-6 py-10 text-center text-primary border-primary",
                     borders,
                   ].join(" ")}
                   data-animate="fade-up"

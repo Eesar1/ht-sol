@@ -19,7 +19,7 @@ export default function AboutUsSection() {
       <Container >
         <div className="relative pt-14 md:pt-20">
           <svg
-  className="pointer-events-none absolute left-1/2 top-0 -z-10 hidden md:block -translate-x-1/2 w-[min(1600px,150%)]"
+  className="pointer-events-none absolute left-1/2 top-1 -z-10 block -translate-x-1/2 w-[min(1600px,92vw)] sm:w-[min(1600px,90vw)] lg:w-[min(1600px,85vw)]"
   viewBox="0 0 1600 260"
   aria-hidden
 >
@@ -33,11 +33,11 @@ export default function AboutUsSection() {
   </defs>
 
   <text
-    x="50%" y="60%"
+    x="50%" y="90%"
     textAnchor="middle"
     fontFamily="Poppins, var(--font-display), sans-serif"
     fontSize="220"               /* ≈ text-[8rem]–[10rem] */
-    style={{ letterSpacing: "0em", textTransform: "uppercase" }}
+    style={{ letterSpacing: "0.08em", textTransform: "uppercase" }}
     fill="transparent"
     stroke="url(#about-stroke)"
     strokeWidth="1"              /* thinner outline; try 0.8–1.2 */
