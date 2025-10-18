@@ -23,7 +23,6 @@ export const metadata: Metadata = {
     "HT Solutions crafts premium digital experiences spanning web, mobile, branding, and performance marketing.",
   icons: {
     icon: "/banner-globe.png",
-    shortcut: "/banner-globe.png",
     apple: "/banner-globe.png",
   },
 };
