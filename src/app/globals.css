@@ -19,7 +19,6 @@
   --color-surface: var(--surface);
   --color-surface-strong: var(--surface-strong);
   --color-surface-soft: var(--surface-soft);
-  --color-muted-100: var(--text-primary);
   --color-muted-80: var(--text-secondary);
   --color-muted-60: var(--text-subtle);
   --color-accent: #00838a;
